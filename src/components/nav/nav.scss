@@ -1,0 +1,31 @@
+@import "../../Sass/App.scss";
+
+.collapse {
+  opacity: 1;
+}
+
+.navbar-light .navbar-toggler {
+  color: $secondary;
+  border-color: rgba(0, 0, 0, 0.1);
+  background-color: $primary;
+}
+@include media-breakpoint-down(lg) {
+  .collapse {
+    opacity: 0;
+  }
+  .navbar-collapse {
+    width: 100%;
+    position: absolute;
+    top: 43px;
+    height: 5em;
+    left: 0;
+    transition: 0.3s ease-in;
+    background-color: $primary;
+    z-index: 5;
+
+    ul {
+      opacity: 1;
+      transition: 0.2s ease-in;
+    }
+  }
+}

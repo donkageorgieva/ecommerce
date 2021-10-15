@@ -1,0 +1,120 @@
+$border-radius: 0rem;
+$dark: #141414;
+$primary: rgb(254, 89, 97);
+$light: #ffffff;
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+@import "./Utilities";
+
+body {
+  .error {
+    color: $primary;
+  }
+
+  .collapse:not(.show) {
+    display: block;
+    height: 0px;
+    transition: 0.2s ease-in-out;
+    ul {
+      opacity: 1;
+    }
+  }
+
+  input {
+    border-radius: 0px;
+    border: 1px solid #a8a8a8;
+  }
+
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: $light-bg-color;
+
+  h1 {
+    font-family: $title-font;
+    color: $dark;
+    font-weight: 900;
+  }
+  p {
+    font-family: $text-font;
+    font-size: 14px;
+    color: $dark;
+  }
+  ul {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+  }
+  a {
+    text-decoration: none;
+    font-size: 14px;
+
+    font-family: $text-font;
+  }
+
+  .card {
+    overflow: hidden;
+  }
+  .imgContainer {
+    overflow: hidden;
+    height: 70%;
+  }
+  .card-img-top {
+    height: 25em;
+    object-fit: cover;
+    transition: 0.3s ease-in;
+
+    overflow: hidden;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+      transition: 0.3s ease-in;
+    }
+  }
+  .close {
+    height: 12px;
+  }
+  .btn-primary {
+    color: #ffffff;
+  }
+  .btn-outline-primary {
+    @include button-outline-variant(
+      $primary,
+      #ffffff,
+      $primary,
+      $primary,
+      #ffffff
+    );
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  body {
+    .card-img-top {
+      height: 7em;
+    }
+    h5 {
+      font-size: 18px;
+    }
+    .btn {
+      width: 85px;
+      height: 40px;
+      font-size: 14px;
+      padding-right: 5px;
+      padding-left: 5px;
+      a {
+        padding: 0px;
+        margin: 0px;
+        font-size: 14px;
+      }
+      svg {
+        padding: 0px;
+        padding: 0px 5px 0px 0px;
+      }
+    }
+  }
+}
+@import "~bootstrap/scss/bootstrap";

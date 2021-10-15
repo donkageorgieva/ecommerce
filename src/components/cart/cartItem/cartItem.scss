@@ -1,0 +1,73 @@
+@import "../../../Sass/App.scss";
+.cart-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  color: $primary;
+}
+.close-btn {
+  background-color: transparent;
+  border: 1px solid $primary;
+  font-size: 16px;
+  color: $primary;
+  transition: 0.3s ease-in;
+  &:focus {
+    background-color: $primary;
+    color: #ffffff;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: $primary;
+    color: #ffffff;
+    transition: 0.3s ease-in;
+  }
+}
+.cartItem {
+  max-width: 100%;
+  width: 90%;
+  background-color: rgb(255, 255, 255);
+  height: 9em;
+  overflow: hidden;
+  .itemInfo {
+    max-width: 100%;
+    width: 6em;
+    height: 100%;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+      width: 7em;
+      max-width: 100%;
+      transition: 0.3s ease-in;
+      object-position: center;
+      &:hover {
+        transition: 0.3s ease-in;
+        cursor: pointer;
+        transform: scale(1.5);
+      }
+    }
+  }
+  .cartOptions {
+    height: 100%;
+    width: 35%;
+  }
+}
+@include media-breakpoint-down(sm) {
+  .cartItem {
+    .itemInfo {
+      img {
+        width: 8em;
+
+        &:hover {
+          transition: 0.3s ease-in;
+          cursor: pointer;
+          transform: scale(1.5);
+        }
+      }
+    }
+    .cartOptions {
+      height: 100%;
+      width: 35%;
+    }
+  }
+}

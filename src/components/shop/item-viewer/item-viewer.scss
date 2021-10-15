@@ -1,0 +1,19 @@
+@import "../../../Sass/App.scss";
+
+.view-item-img {
+  max-width: 100%;
+
+  height: 30em;
+}
+.view-item-info {
+  max-width: 100%;
+  width: 30%;
+}
+@include media-breakpoint-down(md) {
+  .view-item-info {
+    width: 100%;
+  }
+  .view-item-img {
+    height: 10em;
+  }
+}

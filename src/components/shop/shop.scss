@@ -1,0 +1,46 @@
+@import "../../Sass/App.scss";
+
+@include media-breakpoint-down(sm) {
+  .card {
+    width: 45%;
+  }
+  .card-group {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .card-img-top {
+    height: 10em;
+  }
+  .card-img-top {
+    height: 10em;
+  }
+}
+@include media-breakpoint-down(xs) {
+  .card {
+    width: 43%;
+  }
+  .card-group {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  body {
+    .card-img-top {
+      height: 5em;
+    }
+  }
+}
+@include media-breakpoint-up(md) {
+  .card {
+    width: 900px;
+  }
+  .card-group {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .card-img-top {
+    height: 10em;
+  }
+  .card-img-top {
+    height: 10em;
+  }
+}

@@ -1,0 +1,16 @@
+@import "../../../Sass/App.scss";
+
+.size-btn {
+  background-color: transparent;
+  color: $primary;
+  border: 1px solid $primary;
+  transition: 0.2s ease-in;
+  &:active,
+  &:hover,
+  &:focus {
+    background-color: $primary;
+    cursor: pointer;
+    color: white;
+    transition: 0.2s ease-in;
+  }
+}
