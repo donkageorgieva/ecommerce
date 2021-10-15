@@ -6,7 +6,7 @@ const CartItem = (props) => {
     <li className="cartItem d-flex justify-content-between shadow-sm my-2 ">
       <div className="itemInfo d-flex align-items-center ms-3 me-2">
         <div
-          style={{ height: "10em" }}
+          style={{ height: "8em" }}
           className="d-flex flex-column align-items-start justify-content-center"
         >
           <p className=" my-1">{props.name}</p>

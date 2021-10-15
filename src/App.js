@@ -9,7 +9,7 @@ import CartProvider from "./store/CartProvider";
 import Cart from "../src/components/cart/cart";
 import ItemViewer from "./components/shop/item-viewer/item-vieiwer";
 import Login from "./components/checkout/login/login";
-
+import Register from "./components/checkout/register/register";
 function App() {
   const [toggleCart, setToggleCart] = useState("hide");
   const toggleCartHandler = () => {
@@ -38,9 +38,13 @@ function App() {
               {" "}
               <ItemViewer />{" "}
             </Route>
-            <Route path="/checkout">
+            <Route path="/checkout" exact>
               {" "}
               <Login />{" "}
+            </Route>
+            <Route path="/checkout/signUp" exact>
+              {" "}
+              <Register />{" "}
             </Route>
           </main>
         </div>
