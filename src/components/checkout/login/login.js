@@ -1,14 +1,27 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import CustomForm from "../../utility/custom-form/custom-form";
 import * as Yup from "yup";
 import useSendRequest from "../../../hooks/http-hook";
 const Checkout = (props) => {
+  const { sendRequest, items: userData } = useSendRequest();
   const initialValues = {
     email: "",
     password: "",
   };
-  const onSubmit = (data) => {};
+
+  const onSubmit = (data) => {
+    sendRequest({
+      url: "http://localhost:3002/auth/login",
+      method: "POST",
+      body: {
+        email: data.email,
+        password: data.password,
+      },
+    });
+    console.log(userData);
+  };
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Must be a valid email")

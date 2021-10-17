@@ -2,6 +2,7 @@ import React from "react";
 import CustomForm from "../../utility/custom-form/custom-form";
 import * as Yup from "yup";
 import useSendRequest from "../../../hooks/http-hook";
+import { Link } from "react-router-dom";
 const CheckoutRegister = (props) => {
   const { sendRequest, items: userData } = useSendRequest();
   const initialValues = {
@@ -70,6 +71,9 @@ const CheckoutRegister = (props) => {
         ]}
         btnText="Sign up"
       />
+      <p>
+        Already have an account? <Link to="/checkout/login">Log in</Link>
+      </p>
     </React.Fragment>
   );
 };

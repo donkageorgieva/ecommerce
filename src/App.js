@@ -38,7 +38,7 @@ function App() {
               {" "}
               <ItemViewer />{" "}
             </Route>
-            <Route path="/checkout" exact>
+            <Route path="/checkout/login" exact>
               {" "}
               <Login />{" "}
             </Route>
