@@ -1,7 +1,5 @@
 import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+
 import CustomForm from "../../utility/custom-form/custom-form";
 import * as Yup from "yup";
 const CheckoutRegister = (props) => {
