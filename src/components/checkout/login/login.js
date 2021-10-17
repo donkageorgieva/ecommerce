@@ -1,17 +1,14 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
-
 import CustomForm from "../../utility/custom-form/custom-form";
 import * as Yup from "yup";
+import useSendRequest from "../../../hooks/http-hook";
 const Checkout = (props) => {
   const initialValues = {
     email: "",
     password: "",
   };
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const onSubmit = (data) => {};
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Must be a valid email")
@@ -25,6 +22,7 @@ const Checkout = (props) => {
   return (
     <React.Fragment>
       <h1 className="my-4 pt-4"> Log in </h1>
+
       <CustomForm
         initialValues={initialValues}
         onSubmit={onSubmit}

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-
+import { Link } from "react-router-dom";
 import cartContext from "../../store/cart-context";
 import "./cart.scss";
 import CartItem from "./cartItem/cartItem";
@@ -62,12 +62,16 @@ const Cart = (props) => {
           <div className="checkout my-2">
             <h5>Total Price</h5>
             <p className="fw-bold">$ {cart.totalPrice}</p>
-            <button
+            <Link
+              to={"/checkout"}
               className="btn btn-primary w-100 py-2"
+              onClick={() => {
+                props.toggleCartHandler("hide");
+              }}
               disabled={!cart.items.length}
             >
               Checkout
-            </button>
+            </Link>
           </div>
         </div>
       </div>
