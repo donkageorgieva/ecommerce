@@ -1,8 +1,8 @@
 @import "../../Sass/App.scss";
 
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(lg) {
   .card {
-    width: 45%;
+    min-width: 250px !important;
   }
   .card-group {
     display: flex;
@@ -15,9 +15,11 @@
     height: 10em;
   }
 }
+
 @include media-breakpoint-down(xs) {
   .card {
-    width: 43%;
+    width: 44%;
+    min-width: 150px !important;
   }
   .card-group {
     display: flex;

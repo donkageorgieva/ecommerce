@@ -31,7 +31,7 @@ const Nav = (props) => {
       </button>
       <form className="form d-flex  ms-auto">
         <NavLink
-          to="/checkout"
+          to="/checkout/login"
           className=" me-2 btn btn-primary px-2 d-flex align-items-center justify-content-center shadow-none"
           type="button"
         >

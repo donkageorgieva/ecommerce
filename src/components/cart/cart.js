@@ -63,7 +63,7 @@ const Cart = (props) => {
             <h5>Total Price</h5>
             <p className="fw-bold">$ {cart.totalPrice}</p>
             <Link
-              to={"/checkout"}
+              to={"/checkout/login"}
               className="btn btn-primary w-100 py-2"
               onClick={() => {
                 props.toggleCartHandler("hide");
