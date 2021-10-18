@@ -41,8 +41,13 @@ const Cart = (props) => {
 
   return (
     <React.Fragment>
-      <div className={["cart", props.toggleCart].join(" ")}>
-        <div className="container  my-3 mx-3 d-flex flex-column justify-content-center">
+      <div
+        className={[
+          "cart d-flex justify-content-center align-items-start",
+          props.toggleCart,
+        ].join(" ")}
+      >
+        <div className="container  my-3 mx-3 ">
           <div className="d-flex justify-content-between mt-4 closeOptions align-items-center">
             {cart.items.length ? <h4>Items</h4> : <h4>No items</h4>}
             <button className="close-btn" onClick={props.toggleCartHandler}>
