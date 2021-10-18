@@ -10,10 +10,18 @@
   width: 30%;
 }
 @include media-breakpoint-down(md) {
+  .img-wrapper {
+    flex-basis: 50%;
+  }
   .view-item-info {
     width: 100%;
+    flex-basis: 50%;
   }
   .view-item-img {
-    height: 10em;
+    height: 20em;
+    object-fit: cover;
+    height: 100%;
   }
+}
+@include media-breakpoint-down(sm) {
 }

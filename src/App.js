@@ -36,7 +36,7 @@ function App() {
             </Route>
             <Route path="/shop/view:itemName">
               {" "}
-              <ItemViewer />{" "}
+              <ItemViewer toggleCart={toggleCartHandler} />{" "}
             </Route>
             <Route path="/checkout/login" exact>
               {" "}

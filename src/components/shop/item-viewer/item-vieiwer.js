@@ -44,7 +44,7 @@ const ItemViewer = (props) => {
             document.getElementById("modal")
           )
         : null}
-      <div className="d-flex my-4 flex-column flex-md-row">
+      <div className="d-flex my-4 ">
         <div className="img-wrapper me-4">
           <img src={item.url} className="view-item-img" />
         </div>
@@ -72,6 +72,7 @@ const ItemViewer = (props) => {
                 toggleModalHandler();
               } else {
                 cart.addItem(parseInt(params.itemName), 1, size);
+                props.toggleCart();
               }
             }}
           >
