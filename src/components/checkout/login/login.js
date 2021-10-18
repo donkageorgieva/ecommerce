@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import CustomForm from "../../utility/custom-form/custom-form";
 import * as Yup from "yup";
 import useSendRequest from "../../../hooks/http-hook";
+import { motion } from "framer-motion";
 const Checkout = (props) => {
   const { sendRequest, items: userData } = useSendRequest();
   const initialValues = {
@@ -33,7 +34,7 @@ const Checkout = (props) => {
       .required("Password is a required field"),
   });
   return (
-    <React.Fragment>
+    <motion.div>
       <h1 className="my-4 pt-4"> Log in </h1>
 
       <CustomForm
@@ -62,7 +63,7 @@ const Checkout = (props) => {
           Don't have an account? <Link to="/checkout/signUp">Sign up</Link>
         </p>
       </CustomForm>
-    </React.Fragment>
+    </motion.div>
   );
 };
 

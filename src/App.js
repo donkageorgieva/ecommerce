@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import "./Sass/App.scss";
 import ReactDOM from "react-dom";
 import Nav from "./components/nav/nav";
@@ -10,7 +10,9 @@ import Cart from "../src/components/cart/cart";
 import ItemViewer from "./components/shop/item-viewer/item-vieiwer";
 import Login from "./components/checkout/login/login";
 import Register from "./components/checkout/register/register";
+import { motion, AnimatePresence } from "framer-motion";
 function App() {
+  const location = useLocation();
   const [toggleCart, setToggleCart] = useState("hide");
   const toggleCartHandler = () => {
     if (toggleCart === "") {
@@ -26,26 +28,31 @@ function App() {
           <Nav toggleCartHandler={toggleCartHandler} />
 
           <main>
-            <Route path="/" exact>
-              {" "}
-              <Header />{" "}
-            </Route>
-            <Route path="/shop" exact>
-              {" "}
-              <Shop toggleCartHandler={toggleCartHandler} />{" "}
-            </Route>
-            <Route path="/shop/view:itemName">
-              {" "}
-              <ItemViewer toggleCart={toggleCartHandler} />{" "}
-            </Route>
-            <Route path="/checkout/login" exact>
-              {" "}
-              <Login />{" "}
-            </Route>
-            <Route path="/checkout/signUp" exact>
-              {" "}
-              <Register />{" "}
-            </Route>
+            <AnimatePresence>
+              <Switch location={location} key={location.key}>
+                <Route path="/shop/view:itemName">
+                  {" "}
+                  <ItemViewer toggleCart={toggleCartHandler} />{" "}
+                </Route>
+                <Route path="/shop">
+                  {" "}
+                  <Shop toggleCartHandler={toggleCartHandler} />{" "}
+                </Route>
+
+                <Route path="/checkout/login">
+                  {" "}
+                  <Login />{" "}
+                </Route>
+                <Route path="/checkout/signUp">
+                  {" "}
+                  <Register />{" "}
+                </Route>
+                <Route path="/">
+                  {" "}
+                  <Header />{" "}
+                </Route>
+              </Switch>
+            </AnimatePresence>
           </main>
         </div>
       </div>

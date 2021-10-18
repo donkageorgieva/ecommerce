@@ -1,5 +1,5 @@
-import react from "react";
 import React, { useEffect } from "react";
+import { motion } from "framer-motion";
 import ReactDOM from "react-dom";
 import Item from "./item/item";
 import useSendRequest from "../../hooks/http-hook";
@@ -7,6 +7,7 @@ import "./shop.scss";
 import styles from "./shop.module.scss";
 import { useState } from "react/cjs/react.development";
 import { Modal } from "../utility/modal/modal";
+import { animationVariantsS } from "../utility/animation-variants/animation-variants";
 const Shop = (props) => {
   const { isLoading, error, items: itemDB, sendRequest } = useSendRequest();
 
@@ -60,14 +61,18 @@ const Shop = (props) => {
             document.getElementById("modal")
           )
         : null}
-      <section
+      <motion.section
+        variants={animationVariantsS}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
         className={[
           styles.shopSection,
           "d-flex flex-wrap justify-content-start py-5 align-items-center",
         ].join(" ")}
       >
         <ul className="card-group justify-content-center">{items}</ul>
-      </section>
+      </motion.section>
     </React.Fragment>
   );
 };
