@@ -8,6 +8,7 @@ import styles from "./shop.module.scss";
 import { useState } from "react/cjs/react.development";
 import { Modal } from "../utility/modal/modal";
 import { animationVariantsS } from "../utility/animation-variants/animation-variants";
+
 const Shop = (props) => {
   const { isLoading, error, items: itemDB, sendRequest } = useSendRequest();
 
@@ -23,6 +24,7 @@ const Shop = (props) => {
     } else {
       return (
         <Item
+          DB={itemDB}
           name={item.name}
           img={item.url}
           price={item.price}

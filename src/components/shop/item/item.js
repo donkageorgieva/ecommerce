@@ -1,10 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import CartContext from "../../../store/cart-context";
+// import CartContext from "../../../store/cart-context";
 import SizeButtons from "../size-button/size-buttons";
-
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../../store";
+import useSendRequest from "../../../hooks/http-hook";
 const Item = (props) => {
-  const cart = useContext(CartContext);
+  const dispatch = useDispatch();
+  // const cart = useContext(CartContext);
   const [size, setSize] = useState(null);
 
   return (
@@ -42,7 +45,14 @@ const Item = (props) => {
                 props.sizeError(true, props.id);
               } else {
                 props.toggleCartHandler();
-                cart.addItem(props.id, 1, size);
+                // cart.addItem(props.id, 1, size);
+                dispatch(
+                  cartActions.addItem({
+                    itemId: props.id,
+                    DB: props.DB,
+                    chosenSize: size,
+                  })
+                );
                 setSize(null);
                 props.sizeError(false);
               }

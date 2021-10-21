@@ -1,12 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import cartContext from "../../store/cart-context";
+import useSendRequest from "../../hooks/http-hook";
+import { cartActions } from "../../store";
 import "./cart.scss";
 import CartItem from "./cartItem/cartItem";
 const Cart = (props) => {
-  const cart = useContext(cartContext);
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
   const addMoreHandler = (id, size) => {
-    cart.addItem(id, 1, size);
+    dispatch(
+      cartActions.addItem({
+        itemId: id,
+        DB: null,
+        chosenSize: size,
+      })
+    );
   };
   const removeItemsHandler = (id, amount = 1, size = null) => {
     cart.removeItem(id, amount, size);
