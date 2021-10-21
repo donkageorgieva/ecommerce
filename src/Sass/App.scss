@@ -8,6 +8,9 @@ $secondary: #ffecb3;
 
 @import "./Utilities";
 
+html {
+  overflow-y: scroll;
+}
 body {
   .error {
     color: $primary;

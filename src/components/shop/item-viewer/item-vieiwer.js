@@ -8,6 +8,7 @@ import "./item-viewer.scss";
 import { useState } from "react/cjs/react.development";
 import Modal from "../../utility/modal/modal";
 import { motion } from "framer-motion";
+import { animationVariantsO } from "../../utility/animation-variants/animation-variants";
 const ItemViewer = (props) => {
   const cart = useContext(Cart);
   const { error, isLoading, items: item, sendRequest } = useSendRequest();
@@ -45,7 +46,13 @@ const ItemViewer = (props) => {
             document.getElementById("modal")
           )
         : null}
-      <motion.div className="d-flex my-4 ">
+      <motion.div
+        className="d-flex my-4 "
+        variants={animationVariantsO}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
         <div className="img-wrapper me-4">
           <img src={item.url} className="view-item-img" />
         </div>

@@ -46,7 +46,12 @@ const Shop = (props) => {
   }, [sendRequest]);
 
   return (
-    <React.Fragment>
+    <motion.div
+      variants={animationVariantsS}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       {toggleModal
         ? ReactDOM.createPortal(
             <Modal
@@ -61,19 +66,15 @@ const Shop = (props) => {
             document.getElementById("modal")
           )
         : null}
-      <motion.section
-        variants={animationVariantsS}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
+      <div
         className={[
           styles.shopSection,
           "d-flex flex-wrap justify-content-start py-5 align-items-center",
         ].join(" ")}
       >
         <ul className="card-group justify-content-center">{items}</ul>
-      </motion.section>
-    </React.Fragment>
+      </div>
+    </motion.div>
   );
 };
 

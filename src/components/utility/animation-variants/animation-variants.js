@@ -15,7 +15,22 @@ export const animationVariantsY = {
     opacity: 0,
   },
 };
+export const animationVariantsO = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
 
+    transition: {
+      delay: 0.3,
+      duration: 0.3,
+    },
+  },
+  exit: {
+    opacity: 0,
+  },
+};
 export const animationVariantsX = {
   hidden: {
     opacity: 0,
@@ -42,11 +57,22 @@ export const animationVariantsS = {
     opacity: 1,
     scale: 1,
     transition: {
-      delay: 0.2,
-      duration: 0.2,
+      delay: 0.4,
+      duration: 0.4,
     },
   },
   exit: {
     opacity: 0,
+  },
+};
+export const buttonVariants = {
+  hoverInfinity: {
+    scale: 1.1,
+    transition: {
+      yoyo: Infinity,
+    },
+  },
+  hoverNormal: {
+    scale: 1.1,
   },
 };

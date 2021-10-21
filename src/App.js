@@ -10,7 +10,7 @@ import Cart from "../src/components/cart/cart";
 import ItemViewer from "./components/shop/item-viewer/item-vieiwer";
 import Login from "./components/checkout/login/login";
 import Register from "./components/checkout/register/register";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 function App() {
   const location = useLocation();
   const [toggleCart, setToggleCart] = useState("hide");
