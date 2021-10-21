@@ -84,6 +84,59 @@ const cartSlice = createSlice({
         state.itemsAmount = newItemsAmount;
       }
     },
+    removeItem(state, actions) {
+      let existingCartItem;
+      if (actions.payload.chosenSize === null) {
+        existingCartItem = state.items.findIndex(
+          (item) => item.id === actions.payload.itemId
+        );
+      } else {
+        existingCartItem = state.items.findIndex(
+          (item) =>
+            item.id === actions.payload.itemId &&
+            actions.payload.chosenSize === item.chosenSize
+        );
+      }
+
+      let currItem = state.items[existingCartItem];
+      let updatedItem;
+      let updatedPrice =
+        state.totalPrice - currItem.price * actions.payload.qty;
+      let updatedItems;
+      let newItemsAmount;
+
+      if (currItem.amountInCart <= 1) {
+        updatedItems = [...state.items];
+        if (actions.payload.chosenSize === null) {
+          updatedItems = state.items.filter(
+            (item) => item.id !== actions.payload.itemId
+          );
+        } else {
+          updatedItems = state.items.filter(
+            (item) =>
+              item.id !== actions.payload.itemId ||
+              item.chosenSize !== actions.payload.chosenSize
+          );
+        }
+      } else {
+        updatedItem = {
+          ...currItem,
+          amountInCart: currItem.amountInCart - actions.payload.qty,
+        };
+        updatedItems = [...state.items];
+        updatedItems[existingCartItem] = updatedItem;
+      }
+      newItemsAmount = state.itemsAmount - actions.payload.qty;
+      if (newItemsAmount <= 0) {
+        newItemsAmount = 0;
+      }
+      if (updatedPrice <= 0) {
+        updatedPrice = 0;
+      }
+      state.items = updatedItems;
+      state.totalPrice = updatedPrice;
+      state.itemsAmount = newItemsAmount;
+    },
   },
 });
 

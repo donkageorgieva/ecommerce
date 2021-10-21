@@ -21,7 +21,9 @@ const Cart = (props) => {
     );
   };
   const removeItemsHandler = (id, amount = 1, size = null) => {
-    cart.removeItem(id, amount, size);
+    dispatch(
+      cartActions.removeItem({ itemId: id, qty: amount, chosenSize: size })
+    );
   };
 
   const cartItems = cart.items.map((item) => {
