@@ -1,6 +1,6 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialCartState = {
   items: [],
   totalPrice: 0,
   itemsAmount: 0,
@@ -24,7 +24,7 @@ const findItem = (id, items, checkForDuplicate = false, size) => {
 };
 const cartSlice = createSlice({
   name: "cart",
-  initialState,
+  initialState: initialCartState,
   reducers: {
     addItem(state, actions) {
       if (

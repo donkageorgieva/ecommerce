@@ -11,7 +11,6 @@ import { animationVariantsS } from "../utility/animation-variants/animation-vari
 
 const Shop = (props) => {
   const { isLoading, error, items: itemDB, sendRequest } = useSendRequest();
-
   const [toggleModal, setToggleModal] = useState(false);
   const [modalLink, setModalLink] = useState("");
   const toggleModalHandler = () => {

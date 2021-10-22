@@ -1,11 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import "./Sass/App.scss";
 import ReactDOM from "react-dom";
 import Nav from "./components/nav/nav";
 import Header from "./components/header/header";
 import Shop from "./components/shop/shop";
-import CartProvider from "./store/CartProvider";
 import Cart from "../src/components/cart/cart";
 import ItemViewer from "./components/shop/item-viewer/item-vieiwer";
 import Login from "./components/checkout/login/login";
@@ -22,7 +21,7 @@ function App() {
     }
   };
   return (
-    <CartProvider>
+    <React.Fragment>
       <div className="App">
         <div className="container">
           <Nav toggleCartHandler={toggleCartHandler} />
@@ -60,7 +59,7 @@ function App() {
         <Cart toggleCartHandler={toggleCartHandler} toggleCart={toggleCart} />,
         document.getElementById("cart")
       )}
-    </CartProvider>
+    </React.Fragment>
   );
 }
 

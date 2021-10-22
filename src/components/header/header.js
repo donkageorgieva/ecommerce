@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from "./header.module.scss";
+import "./header.scss";
 import { motion } from "framer-motion";
 import { animationVariantsY } from "../utility/animation-variants/animation-variants";
 import { buttonVariants } from "../utility/animation-variants/animation-variants";

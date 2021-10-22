@@ -1,15 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import CartContext from "../../../store/cart-context";
 import SizeButtons from "../size-button/size-buttons";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store";
-import useSendRequest from "../../../hooks/http-hook";
+
 const Item = (props) => {
   const dispatch = useDispatch();
-  // const cart = useContext(CartContext);
   const [size, setSize] = useState(null);
-
   return (
     <React.Fragment>
       <form className="card  border-0 shadow-sm me-2 ">
@@ -23,7 +20,6 @@ const Item = (props) => {
             />{" "}
           </Link>
         </div>
-
         <div className="card-body">
           <h5 className="card-title">{props.name}</h5>
           <p className="card-text">$ {props.price}</p>
@@ -45,7 +41,6 @@ const Item = (props) => {
                 props.sizeError(true, props.id);
               } else {
                 props.toggleCartHandler();
-                // cart.addItem(props.id, 1, size);
                 dispatch(
                   cartActions.addItem({
                     itemId: props.id,

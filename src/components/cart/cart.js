@@ -1,9 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import cartContext from "../../store/cart-context";
-import useSendRequest from "../../hooks/http-hook";
 import { cartActions } from "../../store";
 import "./cart.scss";
 import CartItem from "./cartItem/cartItem";

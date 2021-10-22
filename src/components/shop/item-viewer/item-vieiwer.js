@@ -1,17 +1,18 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReactDOM from "react-dom";
 import SizeButtons from "../size-button/size-buttons";
 import useSendRequest from "../../../hooks/http-hook";
-import Cart from "../../../store/cart-context";
 import "./item-viewer.scss";
 import { useState } from "react/cjs/react.development";
 import Modal from "../../utility/modal/modal";
 import { motion } from "framer-motion";
 import { animationVariantsO } from "../../utility/animation-variants/animation-variants";
+import { cartActions } from "../../../store";
+import { useDispatch } from "react-redux";
 const ItemViewer = (props) => {
-  const cart = useContext(Cart);
   const { error, isLoading, items: item, sendRequest } = useSendRequest();
+  const dispatch = useDispatch();
   const [size, setSize] = useState(null);
   const [toggleModal, setToggleModal] = useState(false);
   const params = useParams();
@@ -79,7 +80,13 @@ const ItemViewer = (props) => {
               if (size === null) {
                 toggleModalHandler();
               } else {
-                cart.addItem(parseInt(params.itemName), 1, size);
+                dispatch(
+                  cartActions.addItem({
+                    itemId: params.itemName,
+                    DB: item,
+                    chosenSize: size,
+                  })
+                );
                 props.toggleCart();
               }
             }}
