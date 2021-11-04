@@ -41,7 +41,6 @@ const cartSlice = createSlice({
           false,
           actions.payload.chosenSize
         );
-
         chosenItem = {
           ...chosenItem,
           amountInCart: chosenItem.amountInCart + 1,

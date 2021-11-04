@@ -17,11 +17,6 @@ const ItemViewer = (props) => {
   const [toggleModal, setToggleModal] = useState(false);
   const params = useParams();
 
-  useEffect(() => {
-    sendRequest({
-      url: `https://sneakers-65e0b-default-rtdb.firebaseio.com/items/${params.itemName.trim()}.json`,
-    });
-  }, [sendRequest, params.itemName]);
   const toggleModalHandler = () => {
     const isModalShown = toggleModal;
     setToggleModal(!isModalShown);
@@ -30,7 +25,11 @@ const ItemViewer = (props) => {
   for (const key in item.sizes) {
     sizes.push(item.sizes[key]);
   }
-
+  useEffect(() => {
+    sendRequest({
+      url: `https://sneakers-65e0b-default-rtdb.firebaseio.com/items/${params.itemId.trim()}.json`,
+    });
+  }, [sendRequest, params.itemId]);
   return (
     <React.Fragment>
       {toggleModal
@@ -41,7 +40,7 @@ const ItemViewer = (props) => {
               positiveAction="Ok"
               negativeAction="Cancel"
               negativeActionFnc={toggleModalHandler}
-              link={params.itemName}
+              link={params.itemId}
               linkToItem={false}
             />,
             document.getElementById("modal")
@@ -67,7 +66,6 @@ const ItemViewer = (props) => {
                   sizes={sizes}
                   choseSize={(size) => {
                     setSize(size);
-                    console.log(size);
                   }}
                 />
               }
@@ -76,14 +74,16 @@ const ItemViewer = (props) => {
           <button
             className="btn btn-primary my-4"
             onClick={(e) => {
+              const itemArr = [];
+              itemArr.push(item);
               e.preventDefault();
               if (size === null) {
                 toggleModalHandler();
               } else {
                 dispatch(
                   cartActions.addItem({
-                    itemId: params.itemName,
-                    DB: item,
+                    itemId: parseInt(params.itemId),
+                    DB: itemArr,
                     chosenSize: size,
                   })
                 );

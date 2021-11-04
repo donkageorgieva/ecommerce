@@ -29,7 +29,7 @@ function App() {
           <main>
             <AnimatePresence>
               <Switch location={location} key={location.key}>
-                <Route path="/shop/view:itemName">
+                <Route path="/shop/view:itemId">
                   {" "}
                   <ItemViewer toggleCart={toggleCartHandler} />{" "}
                 </Route>
