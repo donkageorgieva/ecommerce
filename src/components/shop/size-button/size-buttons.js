@@ -1,5 +1,4 @@
 import "./size-buttons.scss";
-import react from "react";
 import { useRef } from "react";
 import { useEffect } from "react/cjs/react.development";
 const SizeButtons = (props) => {

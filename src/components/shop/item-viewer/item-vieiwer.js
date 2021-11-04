@@ -11,7 +11,7 @@ import { animationVariantsO } from "../../utility/animation-variants/animation-v
 import { cartActions } from "../../../store";
 import { useDispatch } from "react-redux";
 const ItemViewer = (props) => {
-  const { error, isLoading, items: item, sendRequest } = useSendRequest();
+  const { isLoading, items: item, sendRequest } = useSendRequest();
   const dispatch = useDispatch();
   const [size, setSize] = useState(null);
   const [toggleModal, setToggleModal] = useState(false);
@@ -54,7 +54,7 @@ const ItemViewer = (props) => {
         exit="exit"
       >
         <div className="img-wrapper me-4">
-          <img src={item.url} className="view-item-img" />
+          <img src={item.url} className="view-item-img" alt="nike sneakers" />
         </div>
         <div className="view-item-info d-flex flex-column">
           <h4>{isLoading ? "Loading" : item.name} </h4>
@@ -115,7 +115,7 @@ const ItemViewer = (props) => {
                 viewBox="0 0 16 16"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"
                 />
               </svg>

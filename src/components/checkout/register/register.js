@@ -5,7 +5,7 @@ import useSendRequest from "../../../hooks/http-hook";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 const CheckoutRegister = (props) => {
-  const { sendRequest, items: userData } = useSendRequest();
+  const { sendRequest } = useSendRequest();
   const initialValues = {
     email: "",
     password: "",
