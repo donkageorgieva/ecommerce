@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const initialCartState = {
@@ -27,15 +28,14 @@ const cartSlice = createSlice({
   initialState: initialCartState,
   reducers: {
     addItem(state, actions) {
-      if (
-        findItem(
-          actions.payload.itemId,
-          state.items,
-          true,
-          actions.payload.chosenSize
-        ) === undefined
-      ) {
-        let chosenItem = findItem(
+      let chosenItem = findItem(
+        actions.payload.itemId,
+        state.items,
+        true,
+        actions.payload.chosenSize
+      );
+      if (chosenItem === undefined) {
+        chosenItem = findItem(
           actions.payload.itemId,
           actions.payload.DB,
           false,

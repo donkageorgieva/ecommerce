@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import "./Sass/App.scss";
 import ReactDOM from "react-dom";
@@ -10,7 +10,22 @@ import ItemViewer from "./components/shop/item-viewer/item-vieiwer";
 import Login from "./components/checkout/login/login";
 import Register from "./components/checkout/register/register";
 import { AnimatePresence } from "framer-motion";
+import { useSelector, useDispatch } from "react-redux";
+import { sendCart } from "./store/cartHttpActions";
+import useSendRequest from "./hooks/http-hook";
 function App() {
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  let firstAppLoad = true;
+  useEffect(() => {
+    if (firstAppLoad) {
+      firstAppLoad = false;
+      return;
+    }
+    console.log(cart);
+    dispatch(sendCart(cart));
+  }, [cart, dispatch]);
+
   const location = useLocation();
   const [toggleCart, setToggleCart] = useState("hide");
   const toggleCartHandler = () => {
