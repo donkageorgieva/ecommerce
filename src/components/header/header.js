@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-scroll";
 import "./header.scss";
 import { motion } from "framer-motion";
 import { animationVariantsY } from "../utility/animation-variants/animation-variants";
@@ -15,7 +15,7 @@ const Header = () => {
       <form>
         <h1>What's new?</h1>
 
-        <Link to="/shop">
+        <Link to="shop" smooth={true} duration={100}>
           <motion.button
             variants={buttonVariants}
             whileHover="hoverInfinity"

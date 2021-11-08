@@ -12,12 +12,10 @@ import Register from "./components/checkout/register/register";
 import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { sendCart, getCart } from "./store/cartHttpActions";
-import { cartActions } from "./store/index";
 let firstAppLoad = true;
 function App() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (firstAppLoad) {
       firstAppLoad = false;
@@ -50,10 +48,6 @@ function App() {
                   {" "}
                   <ItemViewer toggleCart={toggleCartHandler} />{" "}
                 </Route>
-                <Route path="/shop">
-                  {" "}
-                  <Shop toggleCartHandler={toggleCartHandler} />{" "}
-                </Route>
 
                 <Route path="/checkout/login">
                   {" "}
@@ -65,7 +59,7 @@ function App() {
                 </Route>
                 <Route path="/">
                   {" "}
-                  <Header />{" "}
+                  <Header /> <Shop toggleCartHandler={toggleCartHandler} />{" "}
                 </Route>
               </Switch>
             </AnimatePresence>

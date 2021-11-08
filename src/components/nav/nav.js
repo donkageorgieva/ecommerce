@@ -9,12 +9,12 @@ const Nav = (props) => {
 
   const navOptions = [
     {
-      title: "home",
+      title: "shop",
       link: "/",
     },
     {
-      title: "shop",
-      link: "/shop",
+      title: "log in",
+      link: "/checkout/login",
     },
   ];
   const toggleNavbar = () => {

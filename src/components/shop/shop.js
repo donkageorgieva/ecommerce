@@ -52,6 +52,7 @@ const Shop = (props) => {
       initial="hidden"
       animate="visible"
       exit="exit"
+      name="shop"
     >
       {toggleModal
         ? ReactDOM.createPortal(
