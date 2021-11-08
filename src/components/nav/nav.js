@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 import "./nav.scss";
 const Nav = (props) => {
   const [showNav, setShowNav] = useState(false);
@@ -32,14 +31,14 @@ const Nav = (props) => {
         <span className="navbar-toggler-icon"></span>
       </button>
       <form className="form d-flex  ms-auto">
-        <NavLink
+        <Link
           to="/checkout/login"
           className=" me-2 btn btn-primary px-2 d-flex align-items-center justify-content-center shadow-none"
           type="button"
         >
           {" "}
           Checkout
-        </NavLink>
+        </Link>
         <button
           onClick={props.toggleCartHandler}
           className="btn btn-outline-primary px-2 d-flex align-items-center  shadow-none "
@@ -61,10 +60,12 @@ const Nav = (props) => {
       </form>
       <div
         className={
-          showNav ? "navbar-collapse px-2 " : "collapse navbar-collapse px-0"
+          showNav
+            ? "navbar-collapse d-flex flex-row flex-md-column justify-content-center align-items-center px-0 "
+            : "collapse navbar-collapse px-0"
         }
       >
-        <ul className="navbar-nav me-auto">
+        <ul className="navbar-nav  px-lg-4 d-flex  flex-lg-row flex-md-column align-items-center">
           {navOptions.map((option) => {
             return (
               <li key={option.title} className="nav-item px-1">
@@ -72,8 +73,10 @@ const Nav = (props) => {
                   to={option.link}
                   className="nav-link"
                   href={option.link}
+                  activeClassName="active"
+                  exact={true}
                 >
-                  {option.title}
+                  {option.title.charAt(0).toUpperCase() + option.title.slice(1)}
                 </NavLink>
               </li>
             );

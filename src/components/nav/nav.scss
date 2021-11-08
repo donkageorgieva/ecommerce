@@ -3,21 +3,44 @@
 .collapse {
   opacity: 1;
 }
+nav {
+  ul li a.active {
+    position: relative;
+    transition: 0.4s ease-in-out;
+  }
+
+  ul li a.active::after {
+    position: absolute;
+    width: 0%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: $primary;
+    content: " ";
+    transition: 0.4s ease-in-out;
+  }
+
+  ul li a.active:focus:after {
+    width: 100%;
+  }
+}
 
 .navbar-light .navbar-toggler {
   color: $secondary;
   border-color: rgba(0, 0, 0, 0.1);
   background-color: $primary;
+  z-index: 10;
 }
 @include media-breakpoint-down(lg) {
   .collapse {
     opacity: 0;
   }
   .navbar-collapse {
-    width: 100%;
-    position: absolute;
-    top: 43px;
-    height: 5em;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    height: 100vh;
     left: 0;
     transition: 0.3s ease-in;
     background-color: $primary;
@@ -27,5 +50,10 @@
       opacity: 1;
       transition: 0.2s ease-in;
     }
+  }
+  .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 900;
+    font-size: 25px;
   }
 }
