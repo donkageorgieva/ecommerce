@@ -75,6 +75,9 @@ const Nav = (props) => {
                   href={option.link}
                   activeClassName="active"
                   exact={true}
+                  onClick={() => {
+                    setShowNav(false);
+                  }}
                 >
                   {option.title.charAt(0).toUpperCase() + option.title.slice(1)}
                 </NavLink>
