@@ -136,6 +136,11 @@ const cartSlice = createSlice({
       state.totalPrice = updatedPrice;
       state.itemsAmount = newItemsAmount;
     },
+    setCart(state, action) {
+      state.items = action.payload.items;
+      state.totalPrice = action.payload.totalPrice;
+      state.itemsAmount = action.payload.itemsAmount;
+    },
   },
 });
 

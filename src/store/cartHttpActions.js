@@ -1,3 +1,5 @@
+import { cartActions } from "../store/index";
+
 export const sendCart = (cart) => {
   return async (dispatch) => {
     const sendRequest = async () => {
@@ -5,11 +7,7 @@ export const sendCart = (cart) => {
         "https://sneakers-65e0b-default-rtdb.firebaseio.com/cart.json",
         {
           method: "PUT",
-          body: JSON.stringify({
-            items: cart.items,
-            itemsAmount: cart.itemsAmount,
-            totalPrice: cart.totalPrice,
-          }),
+          body: JSON.stringify(cart),
         }
       );
       return await response.json();
@@ -23,5 +21,23 @@ export const sendCart = (cart) => {
 };
 
 export const getCart = () => {
-  return async (dispatch) => {};
+  return async (dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch(
+        "https://sneakers-65e0b-default-rtdb.firebaseio.com/cart.json"
+      );
+      const data = await response.json();
+      return data;
+    };
+
+    try {
+      const data = await sendRequest();
+      if (!data.items) {
+        return;
+      }
+      dispatch(cartActions.setCart(data));
+    } catch (error) {
+      alert("COULD NOT FETCH DATA");
+    }
+  };
 };

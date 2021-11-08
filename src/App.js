@@ -11,21 +11,23 @@ import Login from "./components/checkout/login/login";
 import Register from "./components/checkout/register/register";
 import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
-import { sendCart } from "./store/cartHttpActions";
-import useSendRequest from "./hooks/http-hook";
+import { sendCart, getCart } from "./store/cartHttpActions";
+import { cartActions } from "./store/index";
+let firstAppLoad = true;
 function App() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  let firstAppLoad = true;
+
   useEffect(() => {
     if (firstAppLoad) {
       firstAppLoad = false;
       return;
     }
-    console.log(cart);
     dispatch(sendCart(cart));
   }, [cart, dispatch]);
-
+  useEffect(() => {
+    dispatch(getCart());
+  }, [dispatch]);
   const location = useLocation();
   const [toggleCart, setToggleCart] = useState("hide");
   const toggleCartHandler = () => {
