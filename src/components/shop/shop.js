@@ -1,10 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import ReactDOM from "react-dom";
 import Item from "./item/item";
 import useSendRequest from "../../hooks/http-hook";
 import "./shop.scss";
-import styles from "./shop.module.scss";
 import { useState } from "react/cjs/react.development";
 import { Modal } from "../utility/modal/modal";
 import { animationVariantsS } from "../utility/animation-variants/animation-variants";
@@ -12,12 +12,31 @@ import { animationVariantsS } from "../utility/animation-variants/animation-vari
 const Shop = (props) => {
   const { items: itemDB, sendRequest } = useSendRequest();
   const [toggleModal, setToggleModal] = useState(false);
+  const [showDropdown, setShowDropDown] = useState(false);
   const [modalLink, setModalLink] = useState("");
-  const toggleModalHandler = () => {
-    const isModalShown = toggleModal;
-    setToggleModal(!isModalShown);
+  const [sneakers, setSneakers] = useState([]);
+  const toggleStates = (state, setState) => {
+    setState(!state);
   };
-  const items = itemDB.map((item) => {
+  const sortSneakers = (sortBy) => {
+    switch (sortBy) {
+      case "DESC":
+        const sortedSneakers = sneakers.sort((first, second) => {
+          if (first === null || second === null) {
+            return;
+          }
+        });
+        console.log(sortedSneakers);
+        setSneakers(sortedSneakers);
+        break;
+      default:
+        return;
+    }
+  };
+  useEffect(() => {
+    setSneakers(itemDB);
+  }, [itemDB]);
+  const items = sneakers.map((item) => {
     if (item === null) {
       return;
     } else {
@@ -53,6 +72,7 @@ const Shop = (props) => {
       animate="visible"
       exit="exit"
       name="shop"
+      className="py-5"
     >
       {toggleModal
         ? ReactDOM.createPortal(
@@ -61,7 +81,9 @@ const Shop = (props) => {
               body="Do you want to choose a size now?"
               positiveAction="Ok"
               negativeAction="Cancel"
-              negativeActionFnc={toggleModalHandler}
+              negativeActionFnc={() => {
+                toggleStates(toggleModal, setToggleModal);
+              }}
               link={modalLink}
               linkToItem={true}
             />,
@@ -69,10 +91,63 @@ const Shop = (props) => {
           )
         : null}
       <div
-        className={[
-          styles.shopSection,
-          "d-flex flex-wrap justify-content-start py-5 align-items-center",
-        ].join(" ")}
+        class="dropdown"
+        onClick={() => {
+          toggleStates(showDropdown, setShowDropDown);
+        }}
+      >
+        <button
+          class="btn btn-secondary dropdown-toggle shadow-none"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Sort
+        </button>
+        <ul className={showDropdown ? "dropdown-menu show" : "dropdown-menu"}>
+          <li>
+            <a
+              className="dropdown-item"
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                sortSneakers("NEW");
+              }}
+            >
+              What's new
+            </a>
+          </li>
+          <li>
+            <a
+              className="dropdown-item"
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                sortSneakers("DESC");
+              }}
+            >
+              Price High to Low
+            </a>
+          </li>
+          <li>
+            <a
+              className="dropdown-item"
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                sortSneakers("ASC");
+              }}
+            >
+              Price Low to High
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        className={
+          "d-flex flex-wrap justify-content-start py-5 align-items-center"
+        }
       >
         <ul className="card-group justify-content-center">{items}</ul>
       </div>
