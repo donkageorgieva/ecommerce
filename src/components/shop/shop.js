@@ -20,15 +20,30 @@ const Shop = (props) => {
   };
   const sortSneakers = (sortBy) => {
     switch (sortBy) {
-      case "DESC":
-        const sortedSneakers = sneakers.sort((first, second) => {
+      case "ASC":
+        const sortedSneakersAsc = sneakers.sort((first, second) => {
           if (first === null || second === null) {
             return;
           }
+          if (first.price < second.price) {
+            return -1;
+          }
         });
-        console.log(sortedSneakers);
-        setSneakers(sortedSneakers);
+
+        setSneakers(sortedSneakersAsc);
         break;
+      case "DESC":
+        const sortedSneakersDesc = sneakers.sort((first, second) => {
+          if (first === null || second === null) {
+            return;
+          }
+          if (first.price > second.price) {
+            return -1;
+          }
+        });
+
+        setSneakers(sortedSneakersDesc);
+
       default:
         return;
     }
@@ -106,18 +121,6 @@ const Shop = (props) => {
           Sort
         </button>
         <ul className={showDropdown ? "dropdown-menu show" : "dropdown-menu"}>
-          <li>
-            <a
-              className="dropdown-item"
-              href="/"
-              onClick={(e) => {
-                e.preventDefault();
-                sortSneakers("NEW");
-              }}
-            >
-              What's new
-            </a>
-          </li>
           <li>
             <a
               className="dropdown-item"

@@ -65,6 +65,7 @@ export const animationVariantsS = {
     opacity: 0,
   },
 };
+
 export const buttonVariants = {
   hoverInfinity: {
     scale: 1.1,
