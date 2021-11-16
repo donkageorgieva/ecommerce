@@ -78,7 +78,7 @@ const Cart = (props) => {
           <ul className="my-4">{cartItems}</ul>
           <div className="checkout my-2">
             <h5>Total Price</h5>
-            <p className="fw-bold">$ {cart.totalPrice}</p>
+            <p className="price">$ {cart.totalPrice}</p>
             <Link
               to={"/checkout/login"}
               className="btn btn-primary w-100 py-2"

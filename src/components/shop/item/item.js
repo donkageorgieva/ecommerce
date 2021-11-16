@@ -22,7 +22,7 @@ const Item = (props) => {
         </div>
         <div className="card-body">
           <h5 className="card-title">{props.name}</h5>
-          <p className="card-text">$ {props.price}</p>
+          <p className="card-text price">$ {props.price}</p>
 
           <ul className="d-flex justify-content-start">
             <SizeButtons

@@ -44,7 +44,7 @@ const CartItem = (props) => {
         >
           <div className="d-flex align-items-evenly justify-content-center ">
             <div className="d-flex flex-column  align-items-center justify-content0-center ">
-              <p style={{ fontWeight: "900" }}> $ {props.price}</p>
+              <p className="price"> $ {props.price}</p>
 
               <p>Size: {props.size}</p>
             </div>
