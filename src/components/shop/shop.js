@@ -29,6 +29,8 @@ const Shop = (props) => {
           }
           if (first.price < second.price) {
             return -1;
+          } else {
+            return 1;
           }
         });
 
@@ -41,11 +43,13 @@ const Shop = (props) => {
           }
           if (first.price > second.price) {
             return -1;
+          } else {
+            return 1;
           }
         });
 
         setSneakers(sortedSneakersDesc);
-
+        break;
       default:
         return;
     }
