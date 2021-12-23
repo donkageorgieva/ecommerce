@@ -16,7 +16,7 @@ const Shop = (props) => {
   const [toggleModal, setToggleModal] = useState(false);
   const [showDropdown, setShowDropDown] = useState(false);
   const [modalLink, setModalLink] = useState("");
-  const [sneakers, setSneakers] = useState([]);
+  const [sneakers, setSneakers] = useState(null);
   const toggleStates = (state, setState) => {
     setState(!state);
   };
@@ -54,35 +54,39 @@ const Shop = (props) => {
         return;
     }
   };
-  useEffect(() => {
-    setSneakers(itemDB);
-  }, [itemDB]);
-  const items = sneakers.map((item) => {
-    if (item === null) {
-      return;
-    } else {
-      return (
-        <Item
-          DB={itemDB}
-          name={item.name}
-          img={item.url}
-          price={item.price}
-          id={item.id}
-          key={item.id}
-          sizes={item.sizes}
-          toggleCartHandler={props.toggleCartHandler}
-          sizeError={(value) => {
-            setToggleModal(value);
-            setModalLink(item.id);
-          }}
-        />
-      );
-    }
-  });
 
+  const items = sneakers ? (
+    sneakers.map((item) => {
+      if (item === null) {
+        return;
+      } else {
+        return (
+          <Item
+            DB={itemDB}
+            name={item.name}
+            img={item.url}
+            price={item.price}
+            id={item.id}
+            key={item.id}
+            sizes={item.sizes}
+            toggleCartHandler={props.toggleCartHandler}
+            sizeError={(value) => {
+              setToggleModal(value);
+              setModalLink(item.id);
+            }}
+          />
+        );
+      }
+    })
+  ) : (
+    <h1> Loading ... </h1>
+  );
   useEffect(() => {
     sendRequest({
-      url: "https://sneakers-65e0b-default-rtdb.firebaseio.com/items.json",
+      url: "http://localhost:8080/items/sneakers",
+      fn: (data) => {
+        setSneakers(data.items);
+      },
     });
   }, [sendRequest]);
 

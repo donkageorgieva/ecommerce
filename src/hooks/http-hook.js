@@ -8,22 +8,38 @@ const useSendRequest = () => {
     setIsLoading(true);
     setError(null);
 
-    try {
-      const response = await fetch(requestConfig.url, {
-        method: requestConfig.method ? requestConfig.method : "GET",
-        headers: requestConfig.headers ? requestConfig.headers : {},
-        body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
+    // try {
+    // const response = await
+    fetch(requestConfig.url, {
+      method: requestConfig.method ? requestConfig.method : "GET",
+      headers: requestConfig.headers
+        ? requestConfig.headers
+        : { "Content-Type": "application/json" },
+      body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Request failed!");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setitems(data);
+        console.log(data);
+        requestConfig.fn(data);
+      })
+      .catch((err) => {
+        setError(err);
       });
 
-      if (!response.ok) {
-        throw new Error("Request failed!");
-      }
-
-      const data = await response.json();
-      setitems(data);
-    } catch (error) {
-      setError(error);
-    }
+    // const data = await response.json();
+    // setitems(data);
+    // if (requestConfig.fn) {
+    //   console.log(data, "data");
+    // }
+    // } catch (error) {
+    //   setError(error);
+    // }
     setIsLoading(false);
   }, []);
   return {

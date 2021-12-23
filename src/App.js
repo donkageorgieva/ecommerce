@@ -12,8 +12,10 @@ import Register from "./components/checkout/register/register";
 import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { sendCart, getCart } from "./store/cartHttpActions";
+import useSendRequest from "./hooks/http-hook";
 let firstAppLoad = true;
 function App() {
+  const { isLoading, error, items, sendRequest } = useSendRequest();
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -26,6 +28,18 @@ function App() {
   useEffect(() => {
     dispatch(getCart());
   }, [dispatch]);
+  useEffect(() => {
+    sendRequest({
+      url: "http://localhost:8080/cart",
+      method: "POST",
+      body: {
+        itemsAmount: 5,
+        totalPrice: 200,
+        items: [{ name: "food", price: 2 }],
+      },
+    });
+  }, []);
+
   const location = useLocation();
   const [toggleCart, setToggleCart] = useState("hide");
   const toggleCartHandler = () => {
