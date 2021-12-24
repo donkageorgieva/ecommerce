@@ -25,10 +25,12 @@ const ItemViewer = (props) => {
   for (const key in item.sizes) {
     sizes.push(item.sizes[key]);
   }
+
   useEffect(() => {
     sendRequest({
-      url: `https://sneakers-65e0b-default-rtdb.firebaseio.com/items/${params.itemId.trim()}.json`,
+      url: `http://localhost:8080/items/sneakers/view${params.itemId.trim()}`,
     });
+    console.log(params.itemId);
   }, [sendRequest, params.itemId]);
   return (
     <React.Fragment>

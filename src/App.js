@@ -28,17 +28,6 @@ function App() {
   useEffect(() => {
     dispatch(getCart());
   }, [dispatch]);
-  useEffect(() => {
-    sendRequest({
-      url: "http://localhost:8080/cart",
-      method: "POST",
-      body: {
-        itemsAmount: 5,
-        totalPrice: 200,
-        items: [{ name: "food", price: 2 }],
-      },
-    });
-  }, []);
 
   const location = useLocation();
   const [toggleCart, setToggleCart] = useState("hide");

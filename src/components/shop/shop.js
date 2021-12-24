@@ -55,7 +55,7 @@ const Shop = (props) => {
     }
   };
 
-  const items = sneakers ? (
+  let items = sneakers ? (
     sneakers.map((item) => {
       if (item === null) {
         return;
@@ -66,13 +66,13 @@ const Shop = (props) => {
             name={item.name}
             img={item.url}
             price={item.price}
-            id={item.id}
-            key={item.id}
+            id={item._id}
+            key={item._id}
             sizes={item.sizes}
             toggleCartHandler={props.toggleCartHandler}
             sizeError={(value) => {
               setToggleModal(value);
-              setModalLink(item.id);
+              setModalLink(item._id);
             }}
           />
         );
@@ -85,7 +85,7 @@ const Shop = (props) => {
     sendRequest({
       url: "http://localhost:8080/items/sneakers",
       fn: (data) => {
-        setSneakers(data.items);
+        setSneakers(data);
       },
     });
   }, [sendRequest]);

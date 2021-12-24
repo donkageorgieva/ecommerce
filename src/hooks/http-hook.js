@@ -8,8 +8,6 @@ const useSendRequest = () => {
     setIsLoading(true);
     setError(null);
 
-    // try {
-    // const response = await
     fetch(requestConfig.url, {
       method: requestConfig.method ? requestConfig.method : "GET",
       headers: requestConfig.headers
@@ -32,14 +30,6 @@ const useSendRequest = () => {
         setError(err);
       });
 
-    // const data = await response.json();
-    // setitems(data);
-    // if (requestConfig.fn) {
-    //   console.log(data, "data");
-    // }
-    // } catch (error) {
-    //   setError(error);
-    // }
     setIsLoading(false);
   }, []);
   return {
