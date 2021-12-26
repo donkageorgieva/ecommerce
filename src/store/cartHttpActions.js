@@ -6,7 +6,7 @@ export const sendCart = (cart) => {
       const response = await fetch(
         "https://sneakers-65e0b-default-rtdb.firebaseio.com/cart.json",
         {
-          method: "PUT",
+          method: "POST",
           body: JSON.stringify(cart),
         }
       );
@@ -23,9 +23,7 @@ export const sendCart = (cart) => {
 export const getCart = () => {
   return async (dispatch) => {
     const sendRequest = async () => {
-      const response = await fetch(
-        "https://sneakers-65e0b-default-rtdb.firebaseio.com/cart.json"
-      );
+      const response = await fetch("http://localhost:8080/cart");
       const data = await response.json();
       return data;
     };
@@ -35,6 +33,7 @@ export const getCart = () => {
       if (!data.items) {
         return;
       }
+
       dispatch(cartActions.setCart(data));
     } catch (error) {
       alert("COULD NOT FETCH DATA");

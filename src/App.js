@@ -12,11 +12,11 @@ import Register from "./components/checkout/register/register";
 import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { sendCart, getCart } from "./store/cartHttpActions";
-import useSendRequest from "./hooks/http-hook";
+import { cartActions } from "./store/index";
 let firstAppLoad = true;
 function App() {
-  const { isLoading, error, items, sendRequest } = useSendRequest();
   const cart = useSelector((state) => state.cart);
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (firstAppLoad) {
@@ -24,6 +24,7 @@ function App() {
       return;
     }
     dispatch(sendCart(cart));
+    console.log(cart);
   }, [cart, dispatch]);
   useEffect(() => {
     dispatch(getCart());
@@ -43,7 +44,6 @@ function App() {
       <div className="App">
         <div className="container">
           <Nav toggleCartHandler={toggleCartHandler} />
-
           <main>
             <AnimatePresence>
               <Switch location={location} key={location.key}>

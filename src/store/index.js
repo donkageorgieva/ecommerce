@@ -11,12 +11,12 @@ const findItem = (id, items, checkForDuplicate = false, size) => {
   if (checkForDuplicate) {
     existingCartItem = items.findIndex((item) => {
       if (item === null) return;
-      else return item.id === id && item.chosenSize === size;
+      else return item._id.trim() === id.trim() && item.chosenSize === size;
     });
   } else {
     existingCartItem = items.findIndex((item) => {
       if (item === null) return;
-      else return item.id === id;
+      else return item._id.trim() === id.trim();
     });
   }
 
@@ -34,6 +34,7 @@ const cartSlice = createSlice({
         true,
         actions.payload.chosenSize
       );
+      console.log(chosenItem, "CHOSEN");
       if (chosenItem === undefined) {
         chosenItem = findItem(
           actions.payload.itemId,
@@ -41,6 +42,7 @@ const cartSlice = createSlice({
           false,
           actions.payload.chosenSize
         );
+        console.log(chosenItem);
         chosenItem = {
           ...chosenItem,
           amountInCart: chosenItem.amountInCart + 1,
@@ -136,10 +138,10 @@ const cartSlice = createSlice({
       state.totalPrice = updatedPrice;
       state.itemsAmount = newItemsAmount;
     },
-    setCart(state, action) {
-      state.items = action.payload.items;
-      state.totalPrice = action.payload.totalPrice;
-      state.itemsAmount = action.payload.itemsAmount;
+    setCart(state, actions) {
+      state.items = actions.payload.items;
+      state.totalPrice = actions.payload.totalPrice;
+      state.itemsAmount = actions.payload.itemsAmount;
     },
   },
 });
