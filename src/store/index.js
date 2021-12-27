@@ -89,12 +89,12 @@ const cartSlice = createSlice({
       let existingCartItem;
       if (actions.payload.chosenSize === null) {
         existingCartItem = state.items.findIndex(
-          (item) => item.id === actions.payload.itemId
+          (item) => item._id === actions.payload.itemId
         );
       } else {
         existingCartItem = state.items.findIndex(
           (item) =>
-            item.id === actions.payload.itemId &&
+            item._id === actions.payload.itemId &&
             actions.payload.chosenSize === item.chosenSize
         );
       }
@@ -110,12 +110,12 @@ const cartSlice = createSlice({
         updatedItems = [...state.items];
         if (actions.payload.chosenSize === null) {
           updatedItems = state.items.filter(
-            (item) => item.id !== actions.payload.itemId
+            (item) => item._id !== actions.payload.itemId
           );
         } else {
           updatedItems = state.items.filter(
             (item) =>
-              item.id !== actions.payload.itemId ||
+              item._id !== actions.payload.itemId ||
               item.chosenSize !== actions.payload.chosenSize
           );
         }

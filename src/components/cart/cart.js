@@ -36,13 +36,13 @@ const Cart = (props) => {
         img={item.url}
         amountInCart={item.amountInCart}
         addMore={() => {
-          addMoreHandler(item.id, item.chosenSize);
+          addMoreHandler(item._id, item.chosenSize);
         }}
         removeItems={() => {
-          removeItemsHandler(item.id, 1, item.chosenSize);
+          removeItemsHandler(item._id, 1, item.chosenSize);
         }}
         removeAllItems={() => {
-          removeItemsHandler(item.id, item.amountInCart, item.chosenSize);
+          removeItemsHandler(item._id, item.amountInCart, item.chosenSize);
         }}
         id={item.id}
         key={item.name + item.chosenSize}
