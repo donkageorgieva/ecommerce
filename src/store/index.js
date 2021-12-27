@@ -45,7 +45,7 @@ const cartSlice = createSlice({
         console.log(chosenItem);
         chosenItem = {
           ...chosenItem,
-          amountInCart: chosenItem.amountInCart + 1,
+          amountInCart: 1,
           chosenSize: actions.payload.chosenSize,
         };
 
@@ -57,7 +57,7 @@ const cartSlice = createSlice({
       } else {
         const existingCartItem = state.items.findIndex(
           (item) =>
-            item.id === actions.payload.itemId &&
+            item._id === actions.payload.itemId &&
             item.chosenSize === actions.payload.chosenSize
         );
         const currItem = findItem(
