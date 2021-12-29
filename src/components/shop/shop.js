@@ -1,13 +1,12 @@
 /* eslint-disable no-fallthrough */
 /* eslint-disable array-callback-return */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import ReactDOM from "react-dom";
 import Item from "./item/item";
 import useSendRequest from "../../hooks/http-hook";
 import "./shop.scss";
-import { useState } from "react/cjs/react.development";
 import { Modal } from "../utility/modal/modal";
 import { animationVariantsS } from "../utility/animation-variants/animation-variants";
 
@@ -17,6 +16,7 @@ const Shop = (props) => {
   const [showDropdown, setShowDropDown] = useState(false);
   const [modalLink, setModalLink] = useState("");
   const [sneakers, setSneakers] = useState(null);
+
   const toggleStates = (state, setState) => {
     setState(!state);
   };

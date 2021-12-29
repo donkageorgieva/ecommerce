@@ -1,5 +1,6 @@
 /* eslint-disable array-callback-return */
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { addToCart } from "./cartHttpActions";
 
 const initialCartState = {
   items: [],
@@ -34,7 +35,7 @@ const cartSlice = createSlice({
         true,
         actions.payload.chosenSize
       );
-      console.log(chosenItem, "CHOSEN");
+      let updatedItem;
       if (chosenItem === undefined) {
         chosenItem = findItem(
           actions.payload.itemId,
@@ -42,14 +43,14 @@ const cartSlice = createSlice({
           false,
           actions.payload.chosenSize
         );
-        console.log(chosenItem);
-        chosenItem = {
+
+        updatedItem = {
           ...chosenItem,
           amountInCart: 1,
           chosenSize: actions.payload.chosenSize,
         };
 
-        state.items.push(chosenItem);
+        state.items.push(updatedItem);
         const updatedPrice = state.totalPrice + chosenItem.price * 1;
         const newItemsAmount = (state.itemsAmount += 1);
         state.itemsAmount = newItemsAmount;
@@ -60,26 +61,17 @@ const cartSlice = createSlice({
             item._id === actions.payload.itemId &&
             item.chosenSize === actions.payload.chosenSize
         );
-        const currItem = findItem(
-          actions.payload.itemId,
-          state.items,
-          true,
-          actions.payload.chosenSize
-        );
 
-        const updatedPrice = state.totalPrice + currItem.price * 1;
+        const updatedPrice = state.totalPrice + chosenItem.price * 1;
         const newItemsAmount = state.itemsAmount + 1;
-        let updatedItem;
 
-        if (currItem) {
-          updatedItem = {
-            ...currItem,
-            amountInCart: currItem.amountInCart + 1,
-            chosenSize: actions.payload.chosenSize,
-          };
+        updatedItem = {
+          ...chosenItem,
+          amountInCart: chosenItem.amountInCart + 1,
+          chosenSize: actions.payload.chosenSize,
+        };
 
-          state.items[existingCartItem] = updatedItem;
-        }
+        state.items[existingCartItem] = updatedItem;
 
         state.totalPrice = updatedPrice;
         state.itemsAmount = newItemsAmount;

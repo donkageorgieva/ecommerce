@@ -18,14 +18,14 @@ function App() {
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (firstAppLoad) {
-      firstAppLoad = false;
-      return;
-    }
-    dispatch(sendCart(cart));
-    console.log(cart);
-  }, [cart, dispatch]);
+  // useEffect(() => {
+  //   if (firstAppLoad) {
+  //     firstAppLoad = false;
+  //     return;
+  //   }
+
+  //   dispatch(sendCart(cart));
+  // }, [cart, dispatch]);
   useEffect(() => {
     dispatch(getCart());
   }, [dispatch]);

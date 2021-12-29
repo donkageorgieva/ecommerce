@@ -1,21 +1,28 @@
 import { cartActions } from "../store/index";
 
-export const sendCart = (cart) => {
-  return async (dispatch) => {
+export const addToCart = (product) => {
+  return async (dispatch, getState) => {
+    dispatch(cartActions.addItem(product));
+    const state = getState();
+    const addedItem = state.cart.items.find(
+      (item) => item._id.toString() === product.itemId.toString()
+    );
+
     const sendRequest = async () => {
-      const response = await fetch(
-        "https://sneakers-65e0b-default-rtdb.firebaseio.com/cart.json",
-        {
-          method: "POST",
-          body: JSON.stringify(cart),
-        }
-      );
+      console.log("SENDING req");
+      const response = await fetch("http://localhost:8080/cart/add-to-cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(addedItem),
+      });
       return await response.json();
     };
     try {
       await sendRequest();
     } catch (error) {
-      alert("COULD NOT SEND CART");
+      console.log(error, "ERROR");
     }
   };
 };
