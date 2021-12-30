@@ -13,23 +13,28 @@ import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { sendCart, getCart } from "./store/cartHttpActions";
 import { cartActions } from "./store/index";
-let firstAppLoad = true;
+
 function App() {
   const cart = useSelector((state) => state.cart);
-
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   if (firstAppLoad) {
-  //     firstAppLoad = false;
-  //     return;
-  //   }
 
-  //   dispatch(sendCart(cart));
-  // }, [cart, dispatch]);
   useEffect(() => {
-    dispatch(getCart());
+    if (window.localStorage.length <= 0) {
+      dispatch(getCart());
+    } else {
+      const newCart = JSON.parse(localStorage.getItem("cart"));
+      dispatch(
+        cartActions.setCart({
+          items: newCart.items,
+          totalPrice: newCart.totalPrice,
+          itemsAmount: newCart.itemsAmount,
+        })
+      );
+    }
   }, [dispatch]);
-
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   const location = useLocation();
   const [toggleCart, setToggleCart] = useState("hide");
   const toggleCartHandler = () => {
