@@ -4,6 +4,7 @@ import SizeButtons from "../size-button/size-buttons";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addToCart } from "../../../store/cartHttpActions";
+import { cartActions } from "../../../store";
 const Item = (props) => {
   const dispatch = useDispatch();
   const [size, setSize] = useState(null);
@@ -43,7 +44,7 @@ const Item = (props) => {
               } else {
                 props.toggleCartHandler();
                 dispatch(
-                  addToCart({
+                  cartActions.addItem({
                     itemId: props.id,
                     DB: props.DB,
                     chosenSize: size,
