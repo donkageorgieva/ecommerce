@@ -30,7 +30,6 @@ const ItemViewer = (props) => {
     sendRequest({
       url: `http://localhost:8080/items/sneakers/view${params.itemId.trim()}`,
     });
-    console.log(params.itemId);
   }, [sendRequest, params.itemId]);
   return (
     <React.Fragment>
@@ -77,19 +76,22 @@ const ItemViewer = (props) => {
             className="btn btn-primary my-4"
             onClick={(e) => {
               const itemArr = [];
-              itemArr.push(item);
-              e.preventDefault();
-              if (size === null) {
-                toggleModalHandler();
-              } else {
-                dispatch(
-                  cartActions.addItem({
-                    itemId: parseInt(params.itemId),
-                    DB: itemArr,
-                    chosenSize: size,
-                  })
-                );
-                props.toggleCart();
+              if (item) {
+                itemArr.push(item);
+                e.preventDefault();
+                if (size === null) {
+                  toggleModalHandler();
+                } else {
+                  dispatch(
+                    cartActions.addItem({
+                      itemId: item._id,
+                      DB: itemArr,
+                      chosenSize: size,
+                    })
+                  );
+
+                  props.toggleCart();
+                }
               }
             }}
           >

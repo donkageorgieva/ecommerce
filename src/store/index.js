@@ -22,6 +22,7 @@ const findItem = (id, items, checkForDuplicate = false, size) => {
   }
 
   const currItem = items[existingCartItem];
+  console.log(currItem, "c");
   return currItem;
 };
 const cartSlice = createSlice({
@@ -35,6 +36,7 @@ const cartSlice = createSlice({
         true,
         actions.payload.chosenSize
       );
+
       let updatedItem;
       if (chosenItem === undefined) {
         chosenItem = findItem(

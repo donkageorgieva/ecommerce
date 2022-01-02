@@ -43,12 +43,12 @@ const Item = (props) => {
                 props.sizeError(true, props.id);
               } else {
                 props.toggleCartHandler();
+                console.log(props.DB, "db");
                 dispatch(
                   cartActions.addItem({
                     itemId: props.id,
                     DB: props.DB,
                     chosenSize: size,
-                    cart: cart,
                   })
                 );
 
