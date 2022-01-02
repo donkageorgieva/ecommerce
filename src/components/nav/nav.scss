@@ -3,6 +3,7 @@
 .collapse {
   opacity: 1;
 }
+
 nav {
   ul li a.active {
     position: relative;
@@ -11,7 +12,7 @@ nav {
 
   ul li a.active::after {
     position: absolute;
-    width: 0%;
+    width: 100%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -19,10 +20,6 @@ nav {
     background-color: $primary;
     content: " ";
     transition: 0.4s ease-in-out;
-  }
-
-  ul li a.active:focus:after {
-    width: 100%;
   }
 }
 

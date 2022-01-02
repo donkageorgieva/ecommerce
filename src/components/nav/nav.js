@@ -71,9 +71,10 @@ const Nav = (props) => {
               <li key={option.title} className="nav-item px-1">
                 <NavLink
                   to={option.link}
-                  className="nav-link"
+                  className={(navData) =>
+                    navData.isActive ? "nav-link active" : "nav-link"
+                  }
                   href={option.link}
-                  activeClassName="active"
                   exact={true}
                   onClick={() => {
                     setShowNav(false);

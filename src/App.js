@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./Sass/App.scss";
 import ReactDOM from "react-dom";
 import Nav from "./components/nav/nav";
@@ -51,25 +51,23 @@ function App() {
           <Nav toggleCartHandler={toggleCartHandler} />
           <main>
             <AnimatePresence>
-              <Switch location={location} key={location.key}>
-                <Route path="/shop/view:itemId">
-                  {" "}
-                  <ItemViewer toggleCart={toggleCartHandler} />{" "}
-                </Route>
+              <Routes location={location} key={location.key}>
+                <Route
+                  path="/shop/view:itemId"
+                  element={<ItemViewer toggleCart={toggleCartHandler} />}
+                ></Route>
 
-                <Route path="/checkout/login">
-                  {" "}
-                  <Login />{" "}
-                </Route>
-                <Route path="/checkout/signUp">
-                  {" "}
-                  <Register />{" "}
-                </Route>
-                <Route path="/">
-                  {" "}
-                  <Header /> <Shop toggleCartHandler={toggleCartHandler} />{" "}
-                </Route>
-              </Switch>
+                <Route path="/checkout/login" element={<Login />}></Route>
+                <Route path="/checkout/signUp" element={<Register />}></Route>
+                <Route
+                  path="/"
+                  element={
+                    <React.Fragment>
+                      <Header /> <Shop toggleCartHandler={toggleCartHandler} />
+                    </React.Fragment>
+                  }
+                ></Route>
+              </Routes>
             </AnimatePresence>
           </main>
         </div>
