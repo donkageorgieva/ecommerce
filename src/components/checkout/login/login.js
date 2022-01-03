@@ -13,7 +13,7 @@ const Checkout = (props) => {
 
   const onSubmit = (data) => {
     sendRequest({
-      url: "http://localhost:3002/auth/login",
+      url: "http://localhost:8080/auth/login",
       method: "POST",
       body: {
         email: data.email,
