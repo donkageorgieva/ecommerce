@@ -28,6 +28,7 @@ const useSendRequest = () => {
       })
       .catch((err) => {
         setError(err);
+        console.log(err);
       });
 
     setIsLoading(false);

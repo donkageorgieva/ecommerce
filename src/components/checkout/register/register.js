@@ -13,8 +13,8 @@ const CheckoutRegister = (props) => {
   };
   const onSubmit = (data) => {
     sendRequest({
-      url: "http://localhost:3002/auth",
-      method: "POST",
+      url: "http://localhost:8080/auth/signup",
+      method: "PUT",
       body: {
         email: data.email,
         password: data.password,
