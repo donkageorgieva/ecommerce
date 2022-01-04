@@ -4,8 +4,12 @@ import CustomForm from "../../utility/custom-form/custom-form";
 import * as Yup from "yup";
 import useSendRequest from "../../../hooks/http-hook";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../../store/user/user";
+
 const Checkout = (props) => {
   const { sendRequest, items: userData } = useSendRequest();
+  const dispatch = useDispatch();
   const initialValues = {
     email: "",
     password: "",
@@ -20,7 +24,13 @@ const Checkout = (props) => {
         password: data.password,
       },
     });
-    console.log(userData);
+    dispatch(
+      userActions.login({
+        userId: userData.userId,
+        token: userData.token,
+        email: data.email,
+      })
+    );
   };
   const validationSchema = Yup.object().shape({
     email: Yup.string()

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { cartActions } from "../../store";
+import { cartActions } from "../../store/cart/cart";
 import "./cart.scss";
 import CartItem from "./cartItem/cartItem";
 const Cart = (props) => {

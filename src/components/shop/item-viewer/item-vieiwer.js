@@ -8,7 +8,7 @@ import { useState } from "react/cjs/react.development";
 import Modal from "../../utility/modal/modal";
 import { motion } from "framer-motion";
 import { animationVariantsO } from "../../utility/animation-variants/animation-variants";
-import { cartActions } from "../../../store";
+import { cartActions } from "../../../store/cart/cart";
 import { useDispatch } from "react-redux";
 const ItemViewer = (props) => {
   const { isLoading, items: item, sendRequest } = useSendRequest();

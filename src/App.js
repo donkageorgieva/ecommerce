@@ -11,8 +11,8 @@ import Login from "./components/checkout/login/login";
 import Register from "./components/checkout/register/register";
 import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
-import { sendCart, getCart } from "./store/cartHttpActions";
-import { cartActions } from "./store/index";
+import { getCart } from "./store/cart/cartHttpActions";
+import { cartActions } from "./store/cart/cart";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -58,7 +58,7 @@ function App() {
                 ></Route>
 
                 <Route path="/checkout/login" element={<Login />}></Route>
-                <Route path="/checkout/signUp" element={<Register />}></Route>
+                <Route path="/checkout/signup" element={<Register />}></Route>
                 <Route
                   path="/"
                   element={
