@@ -21,22 +21,36 @@ export const getCart = () => {
   };
 };
 
-export const sendCart = (cart) => {
-  return () => {
-    fetch("http://localhost:8080/add-to-cart", {
-      method: "POST",
-      body: {
-        cart: cart,
-      },
-    })
-      .then((response) => {
-        return response.json();
+export const addToCart = (product, token) => {
+  return (dispatch) => {
+    return (
+      fetch("http://localhost:8080/cart/add-to-cart", {
+        method: "POST",
+        body: JSON.stringify({
+          itemId: product.itemId,
+          chosenSize: product.chosenSize,
+        }),
+
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+        },
       })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Request failed!");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+        })
+        // .then((result) => {
+
+        // })
+        .catch((err) => {
+          console.log(err);
+        })
+    );
   };
 };

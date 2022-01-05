@@ -11,15 +11,25 @@ import Login from "./components/checkout/login/login";
 import Register from "./components/checkout/register/register";
 import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
-import { getCart } from "./store/cart/cartHttpActions";
+import { getCart, sendCart } from "./store/cart/cartHttpActions";
 import { cartActions } from "./store/cart/cart";
 
 function App() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const location = useLocation();
+  const [toggleCart, setToggleCart] = useState("hide");
 
+  const toggleCartHandler = () => {
+    if (toggleCart === "") {
+      setToggleCart("hide");
+    } else {
+      setToggleCart("");
+    }
+  };
   useEffect(() => {
-    if (window.localStorage.length <= 0) {
+    if (window.localStorage.cart.length <= 0) {
       dispatch(getCart());
     } else {
       const newCart = JSON.parse(localStorage.getItem("cart"));
@@ -31,19 +41,11 @@ function App() {
         })
       );
     }
-  }, [dispatch]);
+  }, [dispatch, user.isLoggedIn]);
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
-  const location = useLocation();
-  const [toggleCart, setToggleCart] = useState("hide");
-  const toggleCartHandler = () => {
-    if (toggleCart === "") {
-      setToggleCart("hide");
-    } else {
-      setToggleCart("");
-    }
-  };
   return (
     <React.Fragment>
       <div className="App">

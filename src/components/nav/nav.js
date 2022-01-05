@@ -2,18 +2,23 @@ import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./nav.scss";
+
 const Nav = (props) => {
   const [showNav, setShowNav] = useState(false);
   const itemsAmount = useSelector((state) => state.cart.itemsAmount);
-
+  const login = useSelector((state) => state.user.isLoggedIn);
   const navOptions = [
     {
       title: "shop",
       link: "/",
     },
     {
-      title: "log in",
-      link: "/checkout/login",
+      title: login ? "log out" : "log in",
+      link: login ? "/checkout" : "/checkout/login",
+    },
+    login && {
+      title: "account",
+      link: "/account",
     },
   ];
   const toggleNavbar = () => {
@@ -67,23 +72,26 @@ const Nav = (props) => {
       >
         <ul className="navbar-nav  px-lg-4 d-flex  flex-lg-row flex-md-column align-items-center">
           {navOptions.map((option) => {
-            return (
-              <li key={option.title} className="nav-item px-1">
-                <NavLink
-                  to={option.link}
-                  className={(navData) =>
-                    navData.isActive ? "nav-link active" : "nav-link"
-                  }
-                  href={option.link}
-                  exact={true}
-                  onClick={() => {
-                    setShowNav(false);
-                  }}
-                >
-                  {option.title.charAt(0).toUpperCase() + option.title.slice(1)}
-                </NavLink>
-              </li>
-            );
+            if (option) {
+              return (
+                <li key={option.title} className="nav-item px-1">
+                  <NavLink
+                    to={option.link}
+                    className={(navData) =>
+                      navData.isActive ? "nav-link active" : "nav-link"
+                    }
+                    href={option.link}
+                    exact={true}
+                    onClick={() => {
+                      setShowNav(false);
+                    }}
+                  >
+                    {option.title.charAt(0).toUpperCase() +
+                      option.title.slice(1)}
+                  </NavLink>
+                </li>
+              );
+            }
           })}
         </ul>
       </div>

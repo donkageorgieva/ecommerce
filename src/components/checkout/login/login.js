@@ -1,15 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import CustomForm from "../../utility/custom-form/custom-form";
 import * as Yup from "yup";
 import useSendRequest from "../../../hooks/http-hook";
 import { motion } from "framer-motion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../../store/user/user";
 
 const Checkout = (props) => {
-  const { sendRequest, items: userData } = useSendRequest();
+  const { sendRequest, items: userData, isLoading } = useSendRequest();
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const usertoken = useSelector((state) => state.user.token);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const initialValues = {
     email: "",
     password: "",
@@ -23,15 +26,20 @@ const Checkout = (props) => {
         email: data.email,
         password: data.password,
       },
+      fn: (response) => {
+        dispatch(
+          userActions.login({
+            userId: response.userId,
+            token: response.token,
+            email: data.email,
+          })
+        );
+      },
     });
-    dispatch(
-      userActions.login({
-        userId: userData.userId,
-        token: userData.token,
-        email: data.email,
-      })
-    );
+
+    navigate("/");
   };
+
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Must be a valid email")

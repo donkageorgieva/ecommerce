@@ -30,6 +30,7 @@ export const cartSlice = createSlice({
   initialState: initialCartState,
   reducers: {
     addItem(state, actions) {
+      console.log("reducer add item");
       let chosenItem = findItem(
         actions.payload.itemId,
         state.items,
