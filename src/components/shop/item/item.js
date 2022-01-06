@@ -10,6 +10,7 @@ const Item = (props) => {
 
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const token = useSelector((state) => state.user.token);
+  const cart = useSelector((state) => state.cart);
   return (
     <React.Fragment>
       <form className="card  border-0 shadow-sm me-2 ">
@@ -51,7 +52,7 @@ const Item = (props) => {
                 };
 
                 if (isLoggedIn) {
-                  dispatch(addToCart(product, token));
+                  dispatch(addToCart(product, token, cart));
                 } else {
                   dispatch(cartActions.addItem(product));
                 }

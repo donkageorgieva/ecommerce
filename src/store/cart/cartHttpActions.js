@@ -20,37 +20,49 @@ export const getCart = () => {
     }
   };
 };
-
-export const addToCart = (product, token) => {
+export const sendCart = (cart) => {
   return (dispatch) => {
-    return (
-      fetch("http://localhost:8080/cart/add-to-cart", {
-        method: "POST",
-        body: JSON.stringify({
-          itemId: product.itemId,
-          chosenSize: product.chosenSize,
-        }),
-
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        },
+    dispatch(
+      cartActions.setCart({
+        items: cart.items,
+        totalPrice: cart.totalPrice,
+        itemsAmount: cart.itemsAmount,
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Request failed!");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-        })
-        // .then((result) => {
-
-        // })
-        .catch((err) => {
-          console.log(err);
-        })
     );
+  };
+};
+export const addToCart = (product, token, cart) => {
+  return async (dispatch) => {
+    dispatch(cartActions.addItem(product));
+    const cartItem = cart.items.find(
+      (item) => item._id.trim() === product.itemId
+    );
+
+    return fetch("http://localhost:8080/cart/add-to-cart", {
+      method: "POST",
+      body: JSON.stringify({
+        itemId: cartItem._id,
+        amountInCart: cartItem.amountInCart,
+        chosenSize: cartItem.chosenSize,
+      }),
+
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Request failed!");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
   };
 };

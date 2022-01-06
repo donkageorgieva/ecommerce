@@ -33,6 +33,7 @@ function App() {
       dispatch(getCart());
     } else {
       const newCart = JSON.parse(localStorage.getItem("cart"));
+
       dispatch(
         cartActions.setCart({
           items: newCart.items,
