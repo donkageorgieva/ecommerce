@@ -34,10 +34,9 @@ const Checkout = (props) => {
             email: data.email,
           })
         );
+        navigate("/");
       },
     });
-
-    navigate("/");
   };
 
   const validationSchema = Yup.object().shape({

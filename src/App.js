@@ -29,20 +29,35 @@ function App() {
     }
   };
   useEffect(() => {
-    if (window.localStorage.cart.length <= 0) {
-      dispatch(getCart());
-    } else {
-      const newCart = JSON.parse(localStorage.getItem("cart"));
+    if (!user.isLoggedIn) {
+      if (window.localStorage.cart) {
+        console.log(window.localStorage.cart, "localstorage");
+        const newCart = JSON.parse(localStorage.getItem("cart"));
 
-      dispatch(
-        cartActions.setCart({
-          items: newCart.items,
-          totalPrice: newCart.totalPrice,
-          itemsAmount: newCart.itemsAmount,
-        })
-      );
+        dispatch(
+          cartActions.setCart({
+            items: newCart.items,
+            totalPrice: newCart.totalPrice,
+            itemsAmount: newCart.itemsAmount,
+          })
+        );
+      }
+    } else {
+      if (window.localStorage.cart) {
+        const newCart = JSON.parse(localStorage.getItem("cart"));
+        const newItems = newCart.items.map((item) => {
+          return {
+            itemId: item._id,
+          };
+        });
+        newCart.items = newItems;
+        console.log(newCart, "new cart");
+        dispatch(sendCart(newCart, user.token));
+        // dispatch(getCart);
+      }
+      dispatch(getCart(user.token));
     }
-  }, [dispatch, user.isLoggedIn]);
+  }, [dispatch, user.isLoggedIn, user.token]);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
