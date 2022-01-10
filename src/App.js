@@ -56,7 +56,6 @@ function App() {
             dispatch(transferCart(user.token, true, newCart));
           } else {
             dispatch(transferCart(user.token));
-            console.log("get cart");
           }
         }
       }

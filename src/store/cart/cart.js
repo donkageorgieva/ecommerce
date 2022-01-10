@@ -133,7 +133,9 @@ export const cartSlice = createSlice({
       state.itemsAmount = newItemsAmount;
     },
     setCart(state, actions) {
-      state.items = actions.payload.items;
+      state.items = actions.payload.items.map((item) => {
+        return item.itemId;
+      });
       state.totalPrice = actions.payload.totalPrice;
       state.itemsAmount = actions.payload.itemsAmount;
     },

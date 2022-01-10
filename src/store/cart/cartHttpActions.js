@@ -18,7 +18,8 @@ export const transferCart = (token, shouldSend = false, cart = null) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data, "DATA from request");
+        console.log(data, "DATA SENT");
+        dispatch(cartActions.setCart(data));
       })
       .catch((err) => {
         throw err;
