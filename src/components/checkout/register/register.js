@@ -2,10 +2,11 @@ import React from "react";
 import CustomForm from "../../utility/custom-form/custom-form";
 import * as Yup from "yup";
 import useSendRequest from "../../../hooks/http-hook";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 const CheckoutRegister = (props) => {
   const { sendRequest } = useSendRequest();
+  const navigate = useNavigate();
   const initialValues = {
     email: "",
     password: "",

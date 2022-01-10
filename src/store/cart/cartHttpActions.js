@@ -1,63 +1,63 @@
 import { cartActions } from "./cart";
 
-export const getCart = (token) => {
+export const transferCart = (token, shouldSend = false, cart = null) => {
   return async (dispatch) => {
-    const sendRequest = async () => {
-      const response = await fetch("http://localhost:8080/cart", {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      return data;
-    };
-
-    try {
-      const data = await sendRequest();
-      if (!data.items) {
-        return;
-      }
-
-      dispatch(cartActions.setCart(data));
-    } catch (error) {
-      alert("COULD NOT FETCH DATA");
-    }
-  };
-};
-export const sendCart = (cart, token) => {
-  return async (dispatch) => {
-    dispatch(
-      cartActions.setCart({
-        items: cart.items,
-        totalPrice: cart.totalPrice,
-        itemsAmount: cart.itemsAmount,
-      })
-    );
-
     return fetch("http://localhost:8080/cart", {
-      method: "POST",
-      body: JSON.stringify({
-        cart: cart,
-      }),
-
+      method: shouldSend ? "POST" : "GET",
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
       },
+      body: shouldSend
+        ? JSON.stringify({
+            cart: cart,
+          })
+        : null,
     })
       .then((response) => {
-        response.json();
+        return response.json();
       })
-      .then()
+      .then((data) => {
+        console.log(data, "DATA from request");
+      })
       .catch((err) => {
-        if (err) {
-          throw err;
-        }
+        throw err;
       });
   };
 };
+// export const sendCart = (cart, token) => {
+//   console.log("sendCart");
+//   return async (dispatch) => {
+//     dispatch(
+//       cartActions.setCart({
+//         items: cart.items,
+//         totalPrice: cart.totalPrice,
+//         itemsAmount: cart.itemsAmount,
+//       })
+//     );
+
+//     return fetch("http://localhost:8080/cart", {
+//       method: "POST",
+//       body: JSON.stringify({
+//         cart: cart,
+//       }),
+
+//       headers: {
+//         Authorization: "Bearer " + token,
+//         "Content-Type": "application/json",
+//       },
+//     })
+//       .then((response) => {
+//         response.json();
+//       })
+//       .then()
+//       .catch((err) => {
+//         if (err) {
+//           throw err;
+//         }
+//       });
+//   };
+// };
 export const addToCart = (product, token, cart) => {
   return async (dispatch) => {
     dispatch(cartActions.addItem(product));

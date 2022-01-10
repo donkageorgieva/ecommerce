@@ -11,7 +11,7 @@ import Login from "./components/checkout/login/login";
 import Register from "./components/checkout/register/register";
 import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
-import { getCart, sendCart } from "./store/cart/cartHttpActions";
+import { transferCart } from "./store/cart/cartHttpActions";
 import { cartActions } from "./store/cart/cart";
 
 function App() {
@@ -31,7 +31,6 @@ function App() {
   useEffect(() => {
     if (!user.isLoggedIn) {
       if (window.localStorage.cart) {
-        console.log(window.localStorage.cart, "localstorage");
         const newCart = JSON.parse(localStorage.getItem("cart"));
 
         dispatch(
@@ -43,19 +42,24 @@ function App() {
         );
       }
     } else {
-      if (window.localStorage.cart) {
-        const newCart = JSON.parse(localStorage.getItem("cart"));
-        const newItems = newCart.items.map((item) => {
-          return {
-            itemId: item._id,
-          };
-        });
-        newCart.items = newItems;
-        console.log(newCart, "new cart");
-        dispatch(sendCart(newCart, user.token));
-        // dispatch(getCart);
+      if (user.isLoggedIn) {
+        if (window.localStorage.cart) {
+          const newCart = JSON.parse(localStorage.getItem("cart"));
+          if (newCart.items.length > 0) {
+            const newItems = newCart.items.map((item) => {
+              return {
+                itemId: item._id,
+              };
+            });
+            newCart.items = newItems;
+
+            dispatch(transferCart(user.token, true, newCart));
+          } else {
+            dispatch(transferCart(user.token));
+            console.log("get cart");
+          }
+        }
       }
-      dispatch(getCart(user.token));
     }
   }, [dispatch, user.isLoggedIn, user.token]);
 
