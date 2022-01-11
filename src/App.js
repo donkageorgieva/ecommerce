@@ -49,10 +49,12 @@ function App() {
             const newItems = newCart.items.map((item) => {
               return {
                 itemId: item._id,
+                amountInCart: item.amountInCart,
+                chosenSize: parseInt(item.chosenSize),
               };
             });
             newCart.items = newItems;
-
+            console.log(newCart, "new cart items");
             dispatch(transferCart(user.token, true, newCart));
           } else {
             dispatch(transferCart(user.token));
