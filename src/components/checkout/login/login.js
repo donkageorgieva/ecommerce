@@ -23,7 +23,7 @@ const Checkout = (props) => {
       url: "http://localhost:8080/auth/login",
       method: "POST",
       body: {
-        email: data.email,
+        email: data.email.toLowerCase(),
         password: data.password,
       },
       fn: (response) => {

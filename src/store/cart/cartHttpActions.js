@@ -19,7 +19,12 @@ export const transferCart = (token, shouldSend = false, cart = null) => {
       })
       .then((data) => {
         console.log(data, "DATA SENT");
-        dispatch(cartActions.setCart(data));
+        const cartPayload = {
+          ...data,
+          isLoggedIn: data && true,
+        };
+        console.log(cartPayload, "payload");
+        dispatch(cartActions.setCart(cartPayload));
       })
       .catch((err) => {
         throw err;

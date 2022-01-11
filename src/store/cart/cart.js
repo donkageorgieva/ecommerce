@@ -133,9 +133,16 @@ export const cartSlice = createSlice({
       state.itemsAmount = newItemsAmount;
     },
     setCart(state, actions) {
-      state.items = actions.payload.items.map((item) => {
-        return item.itemId;
-      });
+      // reformat fetched items to match the state
+
+      if (actions.payload.isLoggedIn === true) {
+        state.items = actions.payload.items.map((item) => {
+          return item.itemId;
+        });
+      } else {
+        state.items = actions.payload.items;
+      }
+
       state.totalPrice = actions.payload.totalPrice;
       state.itemsAmount = actions.payload.itemsAmount;
     },
