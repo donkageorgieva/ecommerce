@@ -46,15 +46,18 @@ function App() {
         if (window.localStorage.cart) {
           const newCart = JSON.parse(localStorage.getItem("cart"));
           if (newCart.items.length > 0) {
-            const newItems = newCart.items.map((item) => {
-              return {
-                itemId: item._id,
-                amountInCart: item.amountInCart,
-                chosenSize: parseInt(item.chosenSize),
-              };
-            });
+            let newItems = newCart.items
+              .filter((item) => item.amountInCart > 0)
+              .map((i) => {
+                return {
+                  itemId: i._id,
+                  amountInCart: i.amountInCart,
+                  chosenSize: parseInt(i.chosenSize),
+                };
+              });
+
             newCart.items = newItems;
-            console.log(newCart, "new cart items");
+
             dispatch(transferCart(user.token, true, newCart));
           } else {
             dispatch(transferCart(user.token));
