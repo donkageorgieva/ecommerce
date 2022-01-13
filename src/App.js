@@ -52,6 +52,7 @@ function App() {
                 return {
                   itemId: i._id,
                   amountInCart: i.amountInCart,
+                  price: i.price,
                   chosenSize: parseInt(i.chosenSize),
                 };
               });
@@ -63,6 +64,7 @@ function App() {
             dispatch(transferCart(user.token));
           }
         }
+        dispatch(transferCart(user.token));
       }
     }
   }, [dispatch, user.isLoggedIn, user.token]);
