@@ -1,7 +1,7 @@
 import { cartActions } from "./cart";
 
 export const transferCart = (token, shouldSend = false, cart = null) => {
-  console.log(cart, "cart to send");
+  console.log(cart, "cart to Send");
   return async (dispatch) => {
     return fetch("http://localhost:8080/cart", {
       method: shouldSend ? "POST" : "GET",
@@ -19,12 +19,11 @@ export const transferCart = (token, shouldSend = false, cart = null) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data, "DATA SENT");
         const cartPayload = {
           ...data,
           isLoggedIn: data && true,
         };
-        console.log(cartPayload, "payload");
+        console.log(data, "data");
         dispatch(cartActions.setCart(cartPayload));
       })
       .catch((err) => {

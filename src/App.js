@@ -45,13 +45,14 @@ function App() {
       if (user.isLoggedIn) {
         if (window.localStorage.cart) {
           const newCart = JSON.parse(localStorage.getItem("cart"));
+          console.log(newCart.itemsAmount, "itemsAmount");
           if (newCart.items.length > 0) {
             let newItems = newCart.items
               .filter((item) => item.amountInCart > 0)
               .map((i) => {
                 return {
                   itemId: i._id,
-                  amountInCart: i.amountInCart,
+                  amountInCart: parseInt(i.amountInCart),
                   price: i.price,
                   chosenSize: parseInt(i.chosenSize),
                 };
