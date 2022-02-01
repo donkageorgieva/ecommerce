@@ -1,7 +1,6 @@
 import { cartActions } from "./cart";
 
 export const transferCart = (token, shouldSend = false, cart = null) => {
-  console.log(cart, "cart to Send");
   return async (dispatch) => {
     return fetch("http://localhost:8080/cart", {
       method: shouldSend ? "POST" : "GET",
@@ -53,13 +52,15 @@ export const addToCart = (product, token, cart) => {
       },
     })
       .then((response) => {
+        console.log("then");
         if (!response.ok) {
           throw new Error("Request failed!");
         }
+
         return response.json();
       })
-      .then((data) => {
-        console.log(data);
+      .then(() => {
+        console.log("sent");
       })
 
       .catch((err) => {
