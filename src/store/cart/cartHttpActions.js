@@ -15,6 +15,7 @@ export const getCart = (token) => {
         return response.json();
       })
       .then((data) => {
+        console.log(data, "data recieved");
         const cartPayload = {
           ...data,
           isLoggedIn: data && true,
@@ -42,13 +43,10 @@ export const sendCart = (token, cart, shouldLogOut) => {
       }),
     })
       .then((response) => {
+        console.log(shouldLogOut, "are we logging out");
         return response.json();
       })
-      .then(() => {
-        if (shouldLogOut) {
-          dispatch(userActions.logout());
-        }
-      })
+      .then(shouldLogOut && dispatch(userActions.logout()))
       .catch((err) => {
         console.log(err);
       });
