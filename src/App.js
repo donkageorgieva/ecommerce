@@ -11,7 +11,7 @@ import Login from "./components/checkout/login/login";
 import Register from "./components/checkout/register/register";
 import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
-import { transferCart } from "./store/cart/cartHttpActions";
+import { sendCart, getCart } from "./store/cart/cartHttpActions";
 import { cartActions } from "./store/cart/cart";
 
 function App() {
@@ -59,13 +59,13 @@ function App() {
               });
 
             newCart.items = newItems;
-
-            dispatch(transferCart(user.token, true, newCart));
+            console.log("first case");
+            dispatch(sendCart(user.token, newCart, false));
           } else {
-            dispatch(transferCart(user.token));
+            dispatch(getCart(user.token));
           }
         }
-        dispatch(transferCart(user.token));
+        // dispatch(transferCart(user.token));
       }
     }
   }, [dispatch, user.isLoggedIn, user.token]);

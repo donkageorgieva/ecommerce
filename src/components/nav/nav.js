@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { userActions } from "../../store/user/user";
+import { sendCart } from "../../store/cart/cartHttpActions";
 import "./nav.scss";
 
 const Nav = (props) => {
   const [showNav, setShowNav] = useState(false);
   const itemsAmount = useSelector((state) => state.cart.itemsAmount);
+  const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.user);
   const login = useSelector((state) => state.user.isLoggedIn);
+  const dispatch = useDispatch();
   const navOptions = [
     {
       title: "shop",
@@ -14,7 +19,28 @@ const Nav = (props) => {
     },
     {
       title: login ? "log out" : "log in",
-      link: login ? "/checkout" : "/checkout/login",
+      link: login ? "/" : "/checkout/login",
+      action: login
+        ? () => {
+            const newCart = {
+              items: cart.items.map((item) => {
+                if (item.amountInCart <= 0) {
+                  return;
+                }
+                return {
+                  itemId: item._id,
+                  price: item.price,
+                  chosenSize: parseInt(item.chosenSize),
+                  amountInCart: item.amountInCart,
+                };
+              }),
+              itemsAmount: cart.itemsAmount,
+              totalPrice: cart.totalPrice,
+            };
+
+            dispatch(sendCart(user.token, newCart, true));
+          }
+        : null,
     },
     login && {
       title: "account",
@@ -84,6 +110,9 @@ const Nav = (props) => {
                     exact={true}
                     onClick={() => {
                       setShowNav(false);
+                      if (option.action) {
+                        option.action();
+                      }
                     }}
                   >
                     {option.title.charAt(0).toUpperCase() +

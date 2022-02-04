@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import SizeButtons from "../size-button/size-buttons";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../store/cart/cart";
-import { addToCart } from "../../../store/cart/cartHttpActions";
+// import { addToCart } from "../../../store/cart/cartHttpActions";
 const Item = (props) => {
   const dispatch = useDispatch();
   const [size, setSize] = useState(null);
@@ -51,11 +51,11 @@ const Item = (props) => {
                   chosenSize: size,
                 };
 
-                if (isLoggedIn) {
-                  dispatch(addToCart(product, token, cart));
-                } else {
-                  dispatch(cartActions.addItem(product));
-                }
+                // if (isLoggedIn) {
+                //   dispatch(addToCart(product, token, cart));
+                // } else {
+                dispatch(cartActions.addItem(product));
+                // }
 
                 setSize(null);
                 props.sizeError(false);

@@ -17,7 +17,13 @@ export const userSlice = createSlice({
       state.token = actions.payload.token;
       state.isLoggedIn = true;
     },
-    logout(state, actions) {},
+    logout(state) {
+      state.email = "";
+      state.userId = "";
+      state.token = "";
+      state.isLoggedIn = false;
+      console.log("logging out");
+    },
   },
 });
 

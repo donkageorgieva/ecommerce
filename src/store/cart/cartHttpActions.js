@@ -1,18 +1,15 @@
 import { cartActions } from "./cart";
+import { userActions } from "../user/user";
 
-export const transferCart = (token, shouldSend = false, cart = null) => {
+//get cart from backend
+export const getCart = (token) => {
   return async (dispatch) => {
     return fetch("http://localhost:8080/cart", {
-      method: shouldSend ? "POST" : "GET",
+      method: "GET",
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
       },
-      body: shouldSend
-        ? JSON.stringify({
-            cart: cart,
-          })
-        : null,
     })
       .then((response) => {
         return response.json();
@@ -22,47 +19,36 @@ export const transferCart = (token, shouldSend = false, cart = null) => {
           ...data,
           isLoggedIn: data && true,
         };
-        console.log(data, "data");
         dispatch(cartActions.setCart(cartPayload));
       })
       .catch((err) => {
-        throw err;
+        console.log(err);
       });
   };
 };
 
-export const addToCart = (product, token, cart) => {
+//post cart to backend
+export const sendCart = (token, cart, shouldLogOut) => {
+  console.log(cart, "cart to send !!");
   return async (dispatch) => {
-    dispatch(cartActions.addItem(product));
-    const cartItem = cart.items.find(
-      (item) => item._id.trim() === product.itemId
-    );
-
-    return fetch("http://localhost:8080/cart/add-to-cart", {
-      method: "POST",
-      body: JSON.stringify({
-        itemId: cartItem._id,
-        amountInCart: cartItem.amountInCart,
-        chosenSize: cartItem.chosenSize,
-      }),
-
+    return fetch("http://localhost:8080/cart", {
+      method: "PUT",
       headers: {
         Authorization: "Bearer " + token,
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        cart: cart,
+      }),
     })
       .then((response) => {
-        console.log("then");
-        if (!response.ok) {
-          throw new Error("Request failed!");
-        }
-
         return response.json();
       })
       .then(() => {
-        console.log("sent");
+        if (shouldLogOut) {
+          dispatch(userActions.logout());
+        }
       })
-
       .catch((err) => {
         console.log(err);
       });
