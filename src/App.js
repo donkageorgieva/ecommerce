@@ -44,9 +44,10 @@ function App() {
     } else {
       if (user.isLoggedIn) {
         if (window.localStorage.cart) {
+          console.log("cart ");
           const newCart = JSON.parse(localStorage.getItem("cart"));
           console.log(newCart.itemsAmount, "itemsAmount");
-          if (newCart.items.length > 0) {
+          if (newCart.items.length > 0 && newCart.itemsAmount > 0) {
             let newItems = newCart.items
               .filter((item) => item.amountInCart > 0)
               .map((i) => {
@@ -62,10 +63,10 @@ function App() {
             console.log("first case");
             dispatch(sendCart(user.token, newCart, false));
           } else {
+            console.log("no cart ");
             dispatch(getCart(user.token));
           }
         }
-        // dispatch(transferCart(user.token));
       }
     }
   }, [dispatch, user.isLoggedIn, user.token]);
