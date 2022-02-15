@@ -4,7 +4,7 @@ import { userActions } from "../user/user";
 //get cart from backend
 export const getCart = (token) => {
   return async (dispatch) => {
-    return fetch("http://localhost:8080/cart", {
+    return fetch("https://ecom-api-nodejs.herokuapp.com/cart", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,
@@ -32,7 +32,7 @@ export const getCart = (token) => {
 export const sendCart = (token, cart, shouldLogOut) => {
   console.log(cart, "cart to send !!");
   return async (dispatch) => {
-    return fetch("http://localhost:8080/cart", {
+    return fetch("https://ecom-api-nodejs.herokuapp.com/cart", {
       method: "PUT",
       headers: {
         Authorization: "Bearer " + token,

@@ -83,7 +83,7 @@ const Shop = (props) => {
   );
   useEffect(() => {
     sendRequest({
-      url: "http://localhost:8080/items/sneakers",
+      url: "https://ecom-api-nodejs.herokuapp.com/items/sneakers",
       fn: (data) => {
         setSneakers(data);
       },

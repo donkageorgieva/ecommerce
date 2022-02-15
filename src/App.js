@@ -29,7 +29,9 @@ function App() {
     }
   };
   useEffect(() => {
+    //check if user is logged in
     if (!user.isLoggedIn) {
+      //add localstorage to the cart
       if (window.localStorage.cart) {
         const newCart = JSON.parse(localStorage.getItem("cart"));
 
@@ -44,9 +46,8 @@ function App() {
     } else {
       if (user.isLoggedIn) {
         if (window.localStorage.cart) {
-          console.log("cart ");
           const newCart = JSON.parse(localStorage.getItem("cart"));
-          console.log(newCart.itemsAmount, "itemsAmount");
+
           if (newCart.items.length > 0 && newCart.itemsAmount > 0) {
             let newItems = newCart.items
               .filter((item) => item.amountInCart > 0)
