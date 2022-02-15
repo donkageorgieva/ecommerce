@@ -28,7 +28,7 @@ const ItemViewer = (props) => {
 
   useEffect(() => {
     sendRequest({
-      url: `http://localhost:8080/items/sneakers/view${params.itemId.trim()}`,
+      url: `https://ecom-api-nodejs.herokuapp.com/items/sneakers/view${params.itemId.trim()}`,
     });
   }, [sendRequest, params.itemId]);
   return (

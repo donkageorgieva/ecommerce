@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import SizeButtons from "../size-button/size-buttons";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { cartActions } from "../../../store/cart/cart";
-// import { addToCart } from "../../../store/cart/cartHttpActions";
+
 const Item = (props) => {
   const dispatch = useDispatch();
   const [size, setSize] = useState(null);
 
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const token = useSelector((state) => state.user.token);
-  const cart = useSelector((state) => state.cart);
   return (
     <React.Fragment>
       <form className="card  border-0 shadow-sm me-2 ">
@@ -51,11 +48,7 @@ const Item = (props) => {
                   chosenSize: size,
                 };
 
-                // if (isLoggedIn) {
-                //   dispatch(addToCart(product, token, cart));
-                // } else {
                 dispatch(cartActions.addItem(product));
-                // }
 
                 setSize(null);
                 props.sizeError(false);

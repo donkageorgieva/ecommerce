@@ -3,13 +3,11 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { cartActions } from "../../store/cart/cart";
-// import { addToCart } from "../../store/cart/cartHttpActions";
+
 import "./cart.scss";
 import CartItem from "./cartItem/cartItem";
 const Cart = (props) => {
   const cart = useSelector((state) => state.cart);
-  const itemsAmount = useSelector((state) => state.cart.itemsAmount);
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const addMoreHandler = (id, size) => {
@@ -19,28 +17,6 @@ const Cart = (props) => {
         chosenSize: size,
       })
     );
-    // if (user.isLoggedIn) {
-    //   console.log(cart.itemsAmount, "items amount");
-    //   dispatch(
-    //     addToCart(
-    //       {
-    //         itemId: id,
-    //         chosenSize: size,
-    //         itemsAmount,
-    //       },
-    //       user.token,
-    //       cart
-    //     )
-    //   );
-    // } else {
-    //   dispatch(
-    //     cartActions.addItem({
-    //       itemId: id,
-    //       DB: null,
-    //       chosenSize: size,
-    //     })
-    //   );
-    // }
   };
   const removeItemsHandler = (id, amount = 1, size = null) => {
     dispatch(

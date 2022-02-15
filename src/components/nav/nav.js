@@ -107,7 +107,6 @@ const Nav = (props) => {
                       navData.isActive ? "nav-link active" : "nav-link"
                     }
                     href={option.link}
-                    exact={true}
                     onClick={() => {
                       setShowNav(false);
                       if (option.action) {
