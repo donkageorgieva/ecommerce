@@ -9,6 +9,7 @@
   max-width: 100%;
   width: 30%;
 }
+
 @include media-breakpoint-down(md) {
   .img-wrapper {
     flex-basis: 50%;
@@ -18,7 +19,6 @@
     flex-basis: 50%;
   }
   .view-item-img {
-    height: 20em;
     object-fit: cover;
     height: 100%;
   }

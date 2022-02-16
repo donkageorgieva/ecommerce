@@ -74,6 +74,7 @@ const ItemViewer = (props) => {
           </div>
           <button
             className="btn btn-primary my-4"
+            style={{ width: "100%" }}
             onClick={(e) => {
               const itemArr = [];
               if (item) {
