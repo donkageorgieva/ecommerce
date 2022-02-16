@@ -1,6 +1,9 @@
 @import "../../Sass/App.scss";
 
 @include media-breakpoint-down(md) {
+  .btn {
+    width: 100%;
+  }
   .card {
     width: 44%;
     min-width: 250px !important;
