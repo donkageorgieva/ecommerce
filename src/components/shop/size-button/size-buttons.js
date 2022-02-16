@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import "./size-buttons.scss";
 import { useRef } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
 const SizeButtons = (props) => {
   const sizesRef = useRef([]);
   useEffect(() => {
