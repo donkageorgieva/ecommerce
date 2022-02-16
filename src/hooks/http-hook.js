@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react/cjs/react.development";
+import { useState, useCallback } from "react";
 
 const useSendRequest = () => {
   const [isLoading, setIsLoading] = useState(false);
