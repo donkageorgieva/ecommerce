@@ -15,7 +15,7 @@ const SizeButtons = (props) => {
         <li key={size} id={size}>
           <button
             ref={(el) => (sizesRef.current[i] = el)}
-            className="size-btn me-2 my-1"
+            className="size-btn me-1 my-1"
             onClick={(e) => {
               props.choseSize(sizesRef.current[i].innerHTML);
               e.preventDefault();
