@@ -10,7 +10,7 @@ const Item = (props) => {
 
   return (
     <React.Fragment>
-      <form className="card  border-0 shadow-sm me-2 flex-fill ">
+      <form className="card  border-0 shadow-sm me-2 flex-grow-1 ">
         <div className="imgContainer">
           <Link to={["/shop/view", props.id].join(" ")}>
             {" "}
