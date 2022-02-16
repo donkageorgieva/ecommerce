@@ -162,7 +162,7 @@ const Shop = (props) => {
           "d-flex flex-wrap justify-content-start py-5 align-items-center"
         }
       >
-        <ul className="card-group justify-content-center">{items}</ul>
+        <ul className="card-group justify-content-start">{items}</ul>
       </div>
     </motion.div>
   );
