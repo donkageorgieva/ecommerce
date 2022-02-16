@@ -16,21 +16,18 @@ const useSendRequest = () => {
       body: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
     })
       .then((response) => {
-        console.log(response.headers, "response");
         if (!response.ok) {
           throw new Error("Request failed!");
         }
         return response.json();
       })
       .then((data) => {
-        console.log(data, "data");
         setitems(data);
-        console.log(data);
+
         requestConfig.fn(data);
       })
       .catch((err) => {
         setError(err);
-        console.log(err);
       });
 
     setIsLoading(false);

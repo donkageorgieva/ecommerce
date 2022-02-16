@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./Sass/App.scss";
 import ReactDOM from "react-dom";
@@ -6,14 +6,18 @@ import Nav from "./components/nav/nav";
 import Header from "./components/header/header";
 import Shop from "./components/shop/shop";
 import Cart from "../src/components/cart/cart";
-import ItemViewer from "./components/shop/item-viewer/item-vieiwer";
-import Login from "./components/checkout/login/login";
-import Register from "./components/checkout/register/register";
 import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { sendCart, getCart } from "./store/cart/cartHttpActions";
 import { cartActions } from "./store/cart/cart";
 
+const ItemViewer = React.lazy(() =>
+  import("./components/shop/item-viewer/item-vieiwer")
+);
+const Login = React.lazy(() => import("./components/checkout/login/login"));
+const Register = React.lazy(() =>
+  import("./components/checkout/register/register")
+);
 function App() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -82,23 +86,26 @@ function App() {
           <Nav toggleCartHandler={toggleCartHandler} />
           <main>
             <AnimatePresence>
-              <Routes location={location} key={location.key}>
-                <Route
-                  path="/shop/view:itemId"
-                  element={<ItemViewer toggleCart={toggleCartHandler} />}
-                ></Route>
+              <Suspense fallback={<h1> Loading ... </h1>}>
+                <Routes location={location} key={location.key}>
+                  <Route
+                    path="/shop/view:itemId"
+                    element={<ItemViewer toggleCart={toggleCartHandler} />}
+                  ></Route>
 
-                <Route path="/checkout/login" element={<Login />}></Route>
-                <Route path="/checkout/signup" element={<Register />}></Route>
-                <Route
-                  path="/"
-                  element={
-                    <React.Fragment>
-                      <Header /> <Shop toggleCartHandler={toggleCartHandler} />
-                    </React.Fragment>
-                  }
-                ></Route>
-              </Routes>
+                  <Route path="/checkout/login" element={<Login />}></Route>
+                  <Route path="/checkout/signup" element={<Register />}></Route>
+                  <Route
+                    path="/"
+                    element={
+                      <React.Fragment>
+                        <Header />{" "}
+                        <Shop toggleCartHandler={toggleCartHandler} />
+                      </React.Fragment>
+                    }
+                  ></Route>
+                </Routes>
+              </Suspense>
             </AnimatePresence>
           </main>
         </div>

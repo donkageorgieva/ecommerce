@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import "./size-buttons.scss";
 import { useRef } from "react";
 import { useEffect } from "react/cjs/react.development";

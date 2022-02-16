@@ -1,7 +1,7 @@
+/* eslint-disable array-callback-return */
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { userActions } from "../../store/user/user";
 import { sendCart } from "../../store/cart/cartHttpActions";
 import "./nav.scss";
 
@@ -25,6 +25,7 @@ const Nav = (props) => {
             const newCart = {
               items: cart.items.map((item) => {
                 if (item.amountInCart <= 0) {
+                  // eslint-disable-next-line array-callback-return
                   return;
                 }
                 return {

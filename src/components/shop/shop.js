@@ -116,13 +116,13 @@ const Shop = (props) => {
           )
         : null}
       <div
-        class="dropdown"
+        className="dropdown"
         onClick={() => {
           toggleStates(showDropdown, setShowDropDown);
         }}
       >
         <button
-          class="btn btn-secondary dropdown-toggle shadow-none"
+          className="btn btn-secondary dropdown-toggle shadow-none"
           type="button"
           id="dropdownMenuButton1"
           data-bs-toggle="dropdown"

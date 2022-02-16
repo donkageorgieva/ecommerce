@@ -1,6 +1,5 @@
 /* eslint-disable array-callback-return */
-import { configureStore, createSlice } from "@reduxjs/toolkit";
-// import  {addToCart} from './cartHttpActions'
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialCartState = {
   items: [],

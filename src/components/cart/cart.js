@@ -26,6 +26,7 @@ const Cart = (props) => {
 
   const cartItems = cart.items.map((item) => {
     if (item.amountInCart === 0) {
+      // eslint-disable-next-line array-callback-return
       return;
     }
 
