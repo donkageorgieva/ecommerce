@@ -36,6 +36,7 @@ const Item = (props) => {
 
           <button
             className="btn btn-primary my-3"
+            style={{ width: "100%" }}
             onClick={(e) => {
               e.preventDefault();
               if (size === null) {
