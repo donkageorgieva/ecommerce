@@ -65,10 +65,9 @@ function App() {
               });
 
             newCart.items = newItems;
-            console.log("first case");
+
             dispatch(sendCart(user.token, newCart, false));
           } else {
-            console.log("no cart ");
             dispatch(getCart(user.token));
           }
         }
